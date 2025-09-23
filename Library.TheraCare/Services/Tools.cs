@@ -1,25 +1,9 @@
 using Library.TheraCare.Models;
+
 namespace Library.TheraCare.Services;
 
 public class Tools
 {
-    public void ScheduleAppt(int start, int end)
-    {
-        // ScheduleInfo()
-        // Prompt for day.
-        // Prompt for Doctor. This should also show the doctor's availability for the day.
-    }
-
-    public class Appointment
-    {
-        public DateTime StartTime { get; set; }
-        public TimeSpan Duration { get; set; } = TimeSpan.FromMinutes(30);
-        public bool IsBooked { get; set; } = false;
-        public Physician? Physician { get; set; }
-        // public Patient? Patient { get; set; }
-        public string? Notes { get; set; }
-    }
-
     static public List<Appointment> BuildDaySchedule()
     {
         DateTime startTime =
@@ -50,12 +34,12 @@ public class Tools
         return weekSchedule;
     }
 
-    static public void PhysicianList(ref List<Physician> pl)
-    {
-        Console.WriteLine($"Physicians for the Week {pl.Count}");
-        foreach (var p in pl)
-        {
-            Console.WriteLine($"{p.lastName}");
-        }
-    }
+    // static public void PhysicianList(ref List<Physician> pl)
+    // {
+    //     Console.WriteLine($"Physicians for the Week {pl.Count}");
+    //     foreach (var p in pl)
+    //     {
+    //         Console.WriteLine($"{p.lastName}");
+    //     }
+    // }
 }

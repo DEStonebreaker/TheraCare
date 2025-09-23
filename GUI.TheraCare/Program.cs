@@ -7,8 +7,11 @@ namespace GUI.TheraCare;
         public static void Main(string[] args)
         {
             Console.WriteLine("=== Welcome to, CLITheraCare ===\n");
-            List<Patient> patients = new List<Patient>();
-            List<Physician> physicians = new List<Physician>();
+            // List<Patient> patients = new List<Patient>();
+            List<Patient?> patients = PatientProxy.Current.Patients;
+            List<Physician?> physicians = PhysicianProxy.Current.Physicians;
+            // List<Physician> physicians = new List<Physician>();
+            
 
             // List <List<Tools.Appointment>> weekAppointments = Tools.BuildWeekSchedule();
 
@@ -25,68 +28,69 @@ namespace GUI.TheraCare;
                 switch (choice)
                 {
                     case "1":
-                        Patient patient = new Patient();
-                        patient.BuildPatient();
-                        patients.Add(patient);
+                        PatientProxy.Current.AddPatient();
+                        // ^^^ Effectively calls the code from below
+                        // Patient patient = PatientFactory.FromCli();
+                        // patients.Add(patient);
                         break;
 
                     case "2":
-                        Physician physician = new Physician();
-                        physician.BuildPhysician();
-                        physicians.Add(physician);
+                        PhysicianProxy.Current.AddPhysician();
+                        // Physician physician = PhysicianFactory.FromCli();
+                        // physicians.Add(physician);
                         break;
 
                     case "3":
-                        if (physicians.Count > 0)
-                        {
-                            Tools.PhysicianList(ref physicians);
-                            Console.Write($"\nEnter the name of the physician you wish to see the schedule for.\n>> ");
-                            var output = Console.ReadLine();
-
-                            foreach (var p in physicians)
-                            {
-                                if (p.lastName.ToUpper() == output.ToUpper())
-                                {
-                                    p.ScheduleInfo();
-                                }
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine($"No physicians are available.");
-                        }
+                        // if (physicians.Count > 0)
+                        // {
+                        //     Tools.PhysicianList(ref physicians);
+                        //     Console.Write($"\nEnter the name of the physician you wish to see the schedule for.\n>> ");
+                        //     var output = Console.ReadLine();
+                        //
+                        //     foreach (var p in physicians)
+                        //     {
+                        //         if (p.lastName.ToUpper() == output.ToUpper())
+                        //         {
+                        //             p.ScheduleInfo();
+                        //         }
+                        //     }
+                        // }
+                        // else
+                        // {
+                        //     Console.WriteLine($"No physicians are available.");
+                        // }
 
                         break;
 
                     case "4":
-                        if (physicians.Count == 0)
-                        {
-                            Console.WriteLine("No physicians are available.");
-                            break;
-                        }
-                        
-                        Tools.PhysicianList(ref physicians);
-                        Console.Write("Enter the physician you wish to see the schedule for.\n>> ");
-                        var physicianName = Console.ReadLine();
-                        
-                        var chosenPhysician = physicians.FirstOrDefault(p => p.lastName.ToUpper() == physicianName.ToUpper());
-                        if (chosenPhysician == null)
-                        {
-                            Console.WriteLine("No physician was found.");
-                            break;
-                        }
-                        
-                        Console.Write("Enter a day (1 = Mon, 5 = Fri):\n>> ");
-                        int dayIdx = int.Parse(Console.ReadLine())-1;
-                        
-                        Console.Write("Enter time (HH:MM):\n>> ");
-                        TimeSpan time = TimeSpan.Parse(Console.ReadLine());
-                        
-                        Console.Write("Notes:\n>> ");
-                        var notes = Console.ReadLine();
-                        
-                        bool booked = chosenPhysician.AddAppointment(dayIdx, time, notes);
-                        Console.WriteLine(booked ?  "Appointment booked." : "Time not Available.");
+                        // if (physicians.Count == 0)
+                        // {
+                        //     Console.WriteLine("No physicians are available.");
+                        //     break;
+                        // }
+                        //
+                        // Tools.PhysicianList(ref physicians);
+                        // Console.Write("Enter the physician you wish to see the schedule for.\n>> ");
+                        // var physicianName = Console.ReadLine();
+                        //
+                        // var chosenPhysician = physicians.FirstOrDefault(p => p.lastName.ToUpper() == physicianName.ToUpper());
+                        // if (chosenPhysician == null)
+                        // {
+                        //     Console.WriteLine("No physician was found.");
+                        //     break;
+                        // }
+                        //
+                        // Console.Write("Enter a day (1 = Mon, 5 = Fri):\n>> ");
+                        // int dayIdx = int.Parse(Console.ReadLine())-1;
+                        //
+                        // Console.Write("Enter time (HH:MM):\n>> ");
+                        // TimeSpan time = TimeSpan.Parse(Console.ReadLine());
+                        //
+                        // Console.Write("Notes:\n>> ");
+                        // var notes = Console.ReadLine();
+                        //
+                        // bool booked = chosenPhysician.AddAppointment(dayIdx, time, notes);
+                        // Console.WriteLine(booked ?  "Appointment booked." : "Time not Available.");
 
                         break;
                     
