@@ -4,6 +4,7 @@ namespace Library.TheraCare.Models;
 
 public class Patient
 {
+    public Guid Id { get; init; } = Guid.Empty;
     public string FirstName { get; init; } = string.Empty;
     public string LastName { get; init; } = string.Empty;
     public string Address { get; init; }  = string.Empty;

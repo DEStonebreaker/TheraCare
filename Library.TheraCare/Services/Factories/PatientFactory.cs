@@ -1,6 +1,6 @@
 using Library.TheraCare.Models;
 
-namespace Library.TheraCare.Services;
+namespace Library.TheraCare.Services.Factories;
 
 public static class PatientFactory
 {
@@ -26,6 +26,7 @@ public static class PatientFactory
 
         return new Patient
         {
+            Id = Guid.NewGuid(),
             FirstName = Tools.StrNormalize(fnIn),
             LastName = Tools.StrNormalize(lnIn),
             Address = Tools.StrNormalize(addrIn),

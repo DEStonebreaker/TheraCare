@@ -1,6 +1,6 @@
 using Library.TheraCare.Models;
 
-namespace Library.TheraCare.Services;
+namespace Library.TheraCare.Services.Factories;
 
 public class PhysicianFactory
 {
@@ -23,6 +23,7 @@ public class PhysicianFactory
 
         return new Physician
         {
+            Id = Guid.NewGuid(),
             FirstName = Tools.StrNormalize(firstName),
             LastName = Tools.StrNormalize(lastName),
             LicenseNumber = Tools.StrNormalize(licenseNumber),

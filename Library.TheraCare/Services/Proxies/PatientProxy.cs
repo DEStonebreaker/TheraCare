@@ -1,6 +1,7 @@
 using Library.TheraCare.Models;
+using Library.TheraCare.Services.Factories;
 
-namespace Library.TheraCare.Services;
+namespace Library.TheraCare.Services.Proxies;
 
 public class PatientProxy
 {
@@ -38,6 +39,34 @@ public class PatientProxy
         }
 
         return patient;
+    }
+
+    public Patient GetPatient(Guid id)
+    {
+        Patient? patient = null;
+        lock (InstanceLock)
+        {
+            patient = _patients.FirstOrDefault(p => p?.Id == id);
+        }
+        if (patient == null)
+        {
+            throw new ArgumentNullException(nameof(patient));
+        } 
+        return patient;
+    }
+
+    public bool UpdatePatient(Patient patient)
+    {
+        lock (InstanceLock)
+        {
+            var result = _patients.FirstOrDefault(p => p?.Id == patient.Id);
+            if (result != null)
+            {
+                throw new ArgumentNullException(nameof(patient));
+                // or return false??
+            }
+        }
+        return true;
     }
 
 }

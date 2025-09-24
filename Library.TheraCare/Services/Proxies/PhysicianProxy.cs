@@ -1,6 +1,7 @@
 using Library.TheraCare.Models;
+using Library.TheraCare.Services.Factories;
 
-namespace Library.TheraCare.Services;
+namespace Library.TheraCare.Services.Proxies;
 
 public class PhysicianProxy
 {
@@ -29,7 +30,7 @@ public class PhysicianProxy
 
     public List<Physician?> Physicians => _physicianList;
 
-    public Physician AddPhysician()
+    public Physician CreatePhysician()
     {
         Physician physician = PhysicianFactory.FromCli();
         lock (InstanceLock)

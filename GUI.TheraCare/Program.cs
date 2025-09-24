@@ -1,5 +1,6 @@
 ﻿using Library.TheraCare.Models;
 using Library.TheraCare.Services;
+using Library.TheraCare.Services.Proxies;
 
 namespace GUI.TheraCare;
 
@@ -26,7 +27,7 @@ internal class Program
                     break;
 
                 case "2":
-                    PhysicianProxy.Current.AddPhysician();
+                    PhysicianProxy.Current.CreatePhysician();
                     break;
 
                 case "3":
