@@ -4,7 +4,7 @@ namespace Library.TheraCare.Services;
 
 public class PatientProxy
 {
-    private List<Patient?> _patients;
+    private readonly List<Patient?> _patients;
 
     private PatientProxy()
     {
@@ -12,35 +12,31 @@ public class PatientProxy
     }
 
     private static PatientProxy? _instance;
-    private static object _instanceLock = new object();
+    private static readonly Lock InstanceLock = new Lock();
 
     public static PatientProxy Current
     {
         get
         {
-            lock (_instanceLock)
+            lock (InstanceLock)
             {
-                if (_instance == null)
-                {
-                    _instance = new PatientProxy();
-                }
+                _instance ??= new PatientProxy(); // if null, start proxy.
             }
 
             return _instance;
         }
     }
 
-    public List<Patient?> Patients
-    {
-        get
-        {
-            return _patients;
-        }
-    }
+    public List<Patient?> Patients => _patients;
 
     public Patient AddPatient()
     {
         Patient patient = PatientFactory.FromCli();
+        lock (InstanceLock)
+        {
+            _patients.Add(patient);
+        }
+
         return patient;
     }
 

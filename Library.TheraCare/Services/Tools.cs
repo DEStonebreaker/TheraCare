@@ -2,8 +2,12 @@ using Library.TheraCare.Models;
 
 namespace Library.TheraCare.Services;
 
-public class Tools
+public static class Tools
 {
+    public static string StrNormalize(string? input)
+    {
+        return input?.Trim() ?? "n/a";
+    }
     static public List<Appointment> BuildDaySchedule()
     {
         DateTime startTime =

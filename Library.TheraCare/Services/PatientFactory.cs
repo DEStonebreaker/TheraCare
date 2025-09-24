@@ -24,28 +24,14 @@ public static class PatientFactory
         Console.Write("Enter the gender of the patient (M|F)\n>> ");
         var genIn = Console.ReadLine();
 
-        // return new Patient.PatientBuilder()
-        //     .FirstName(fnIn)
-        //     .LastName(lnIn)
-        //     .Address(addrIn)
-        //     .BirthDate(bdIn)
-        //     .Race(raceIn)
-        //     .Gender(genIn)
-        //     .Build();
-
         return new Patient
         {
-            FirstName = StrNormalize(fnIn),
-            LastName = StrNormalize(lnIn),
-            Address = StrNormalize(addrIn),
-            BirthDate = StrNormalize(bdIn),
-            Race = StrNormalize(raceIn),
-            Gender = StrNormalize(genIn)
+            FirstName = Tools.StrNormalize(fnIn),
+            LastName = Tools.StrNormalize(lnIn),
+            Address = Tools.StrNormalize(addrIn),
+            BirthDate = Tools.StrNormalize(bdIn),
+            Race = Tools.StrNormalize(raceIn),
+            Gender = Tools.StrNormalize(genIn)
         };
-    }
-
-    public static string StrNormalize(string? input)
-    {
-        return input?.Trim() ?? "n/a";
     }
 }

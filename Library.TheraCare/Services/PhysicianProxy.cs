@@ -4,39 +4,39 @@ namespace Library.TheraCare.Services;
 
 public class PhysicianProxy
 {
-    private List<Physician?> _physicianList;
+    private readonly List<Physician?> _physicianList;
 
     private PhysicianProxy()
     {
         _physicianList = new List<Physician?>();
     }
-    
+
     private static PhysicianProxy? _instance;
-    private static object _instanceLock = new object();
+    private static readonly Lock InstanceLock = new Lock();
 
     public static PhysicianProxy Current
     {
         get
         {
-            lock (_instanceLock)
+            lock (InstanceLock)
             {
-                if (_instance == null)
-                {
-                    _instance = new PhysicianProxy();
-                }
+                _instance ??= new PhysicianProxy();
             }
+
             return _instance;
         }
     }
 
-    public List<Physician?> Physicians
-    {
-        get { return _physicianList; }
-    }
+    public List<Physician?> Physicians => _physicianList;
 
     public Physician AddPhysician()
     {
         Physician physician = PhysicianFactory.FromCli();
+        lock (InstanceLock)
+        {
+            _physicianList.Add(physician);
+        }
+
         return physician;
     }
 }

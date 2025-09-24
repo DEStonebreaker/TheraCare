@@ -20,26 +20,14 @@ public class PhysicianFactory
         
         Console.Write("Enter the specializations of the physician\n>> ");
         var specializations = Console.ReadLine();
-        
-        // return new Physician.PhysicianBuilder()
-        //     .FirstName(firstName)
-        //     .LastName(lastName)
-        //     .LicenseNumber(licenseNumber)
-        //     .GradDate(graduationDate)
-        //     .Specializations(specializations)
-        //     .Build();
 
         return new Physician
         {
-            FirstName = StrNormalize(firstName),
-            LastName = StrNormalize(lastName),
-            LicenseNumber = StrNormalize(licenseNumber),
-            GraduationDate = StrNormalize(graduationDate),
-            Specializations = StrNormalize(specializations)
+            FirstName = Tools.StrNormalize(firstName),
+            LastName = Tools.StrNormalize(lastName),
+            LicenseNumber = Tools.StrNormalize(licenseNumber),
+            GraduationDate = Tools.StrNormalize(graduationDate),
+            Specializations = Tools.StrNormalize(specializations)
         };
-    }
-    public static string StrNormalize(string? input)
-    {
-        return input?.Trim() ?? "n/a";
     }
 }
