@@ -6,7 +6,7 @@ namespace Library.TheraCare.Services.Proxies;
 
 public class PatientProxy
 {
-    // private readonly List<Patient?> _patients;
+    private static PatientProxy? _instance;
     private readonly PatientRepository _patientRepository;
     private static readonly Lock InstanceLock = new Lock();
 
@@ -14,10 +14,7 @@ public class PatientProxy
     {
         _patientRepository = patientRepository;
     }
-
-    private static PatientProxy? _instance;
-    // private static readonly Lock InstanceLock = new Lock();
-
+    
     public static PatientProxy Current
     {
         get
@@ -56,8 +53,9 @@ public class PatientProxy
         _patientRepository.Display();
     }
 
-    public bool UpdatePatient(Patient patient)
+    public bool UpdatePatient(Guid patientId)
     {
+        var patient = _patientRepository.GetById(patientId);
         Patient newPatient = PatientFactory.PatientUpdater(patient);
         _patientRepository.Update(newPatient);
         return true;

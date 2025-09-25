@@ -59,12 +59,12 @@ public static class PatientFactory
         return new Patient
         {
             Id = existingPatient.Id,
-            FirstName = (fnIn == "" ? existingPatient.FirstName : fnIn),
-            LastName = (lnIn == "" ? existingPatient.LastName : lnIn),
-            Address = (addrIn == "" ? existingPatient.Address : addrIn),
-            BirthDate = (bdIn == "" ? existingPatient.BirthDate : bdIn),
-            Race = (raceIn == "" ? existingPatient.Race : raceIn),
-            Gender = (genIn == "" ? existingPatient.Gender : genIn),
+            FirstName = (fnIn == "" ? existingPatient.FirstName : Tools.StrNormalize(fnIn)),
+            LastName = (lnIn == "" ? existingPatient.LastName : Tools.StrNormalize(lnIn)),
+            Address = (addrIn == "" ? existingPatient.Address : Tools.StrNormalize(addrIn)),
+            BirthDate = (bdIn == "" ? existingPatient.BirthDate : Tools.StrNormalize(bdIn)),
+            Race = (raceIn == "" ? existingPatient.Race : Tools.StrNormalize(raceIn)),
+            Gender = (genIn == "" ? existingPatient.Gender : Tools.StrNormalize(genIn)),
         };
     }
 }

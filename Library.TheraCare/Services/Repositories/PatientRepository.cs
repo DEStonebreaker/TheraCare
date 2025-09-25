@@ -5,8 +5,6 @@ namespace Library.TheraCare.Services.Repositories;
 public class PatientRepository : IRepository<Patient>
 {
     private readonly List<Patient?> _patients = new List<Patient?>();
-
-    // private static PatientProxy? _instance;
     private static readonly Lock InstanceLock = new Lock();
 
     public Patient Create(Patient patient)

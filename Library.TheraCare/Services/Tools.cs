@@ -8,6 +8,7 @@ public static class Tools
     {
         return input?.Trim() ?? "n/a";
     }
+
     static public List<Appointment> BuildDaySchedule()
     {
         DateTime startTime =
@@ -37,13 +38,4 @@ public static class Tools
 
         return weekSchedule;
     }
-
-    // static public void PhysicianList(ref List<Physician> pl)
-    // {
-    //     Console.WriteLine($"Physicians for the Week {pl.Count}");
-    //     foreach (var p in pl)
-    //     {
-    //         Console.WriteLine($"{p.lastName}");
-    //     }
-    // }
 }

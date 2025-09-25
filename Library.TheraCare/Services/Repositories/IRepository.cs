@@ -6,7 +6,7 @@ public interface IRepository<T>
 {
     T Create(T entity);
     T Update(T entity);
-    Patient GetById(Guid id);
-    IEnumerable<Patient?> GetAll();
+    T GetById(Guid id);
+    IEnumerable<T?> GetAll();
     void Delete(Guid id);
 }
