@@ -1,19 +1,22 @@
 using Library.TheraCare.Models;
 using Library.TheraCare.Services.Factories;
+using Library.TheraCare.Services.Repositories;
 
 namespace Library.TheraCare.Services.Proxies;
 
 public class PatientProxy
 {
-    private readonly List<Patient?> _patients;
+    // private readonly List<Patient?> _patients;
+    private readonly PatientRepository _patientRepository;
+    private static readonly Lock InstanceLock = new Lock();
 
-    private PatientProxy()
+    private PatientProxy(PatientRepository patientRepository)
     {
-        _patients = new List<Patient?>();
+        _patientRepository = patientRepository;
     }
 
     private static PatientProxy? _instance;
-    private static readonly Lock InstanceLock = new Lock();
+    // private static readonly Lock InstanceLock = new Lock();
 
     public static PatientProxy Current
     {
@@ -21,52 +24,47 @@ public class PatientProxy
         {
             lock (InstanceLock)
             {
-                _instance ??= new PatientProxy(); // if null, start proxy.
+                _instance ??= new PatientProxy(new PatientRepository()); // if null, start proxy.
             }
 
             return _instance;
         }
     }
 
-    public List<Patient?> Patients => _patients;
+    public IEnumerable<Patient?> GetPatients => _patientRepository.GetAll();
 
-    public Patient AddPatient()
+    public Patient Create()
     {
         Patient patient = PatientFactory.FromCli();
-        lock (InstanceLock)
-        {
-            _patients.Add(patient);
-        }
-
+        patient = _patientRepository.Create(patient);
         return patient;
     }
 
     public Patient GetPatient(Guid id)
     {
-        Patient? patient = null;
-        lock (InstanceLock)
-        {
-            patient = _patients.FirstOrDefault(p => p?.Id == id);
-        }
+        Patient? patient = _patientRepository.GetById(id);
         if (patient == null)
         {
             throw new ArgumentNullException(nameof(patient));
-        } 
+        }
+
         return patient;
+    }
+
+    public void DisplayPatients()
+    {
+        _patientRepository.Display();
     }
 
     public bool UpdatePatient(Patient patient)
     {
-        lock (InstanceLock)
-        {
-            var result = _patients.FirstOrDefault(p => p?.Id == patient.Id);
-            if (result != null)
-            {
-                throw new ArgumentNullException(nameof(patient));
-                // or return false??
-            }
-        }
+        Patient newPatient = PatientFactory.PatientUpdater(patient);
+        _patientRepository.Update(newPatient);
         return true;
     }
 
+    public void Delete(Guid id)
+    {
+        _patientRepository.Delete(id);
+    }
 }

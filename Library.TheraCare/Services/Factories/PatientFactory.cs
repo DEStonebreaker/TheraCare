@@ -35,4 +35,36 @@ public static class PatientFactory
             Gender = Tools.StrNormalize(genIn)
         };
     }
+
+    public static Patient PatientUpdater(Patient existingPatient)
+    {
+        Console.Write("Enter the new first name of the patient, ENTER to skip\n>> ");
+        var fnIn = Console.ReadLine() ?? String.Empty;
+
+        Console.Write("Enter the new last name of the patient, ENTER to skip\n>> ");
+        var lnIn = Console.ReadLine() ?? String.Empty;
+
+        Console.Write("Enter the new address of the patient, ENTER to skip\n>> ");
+        var addrIn = Console.ReadLine() ?? String.Empty;
+
+        Console.Write("Enter the new birth date of the patient, ENTER to skip\n>> ");
+        var bdIn = Console.ReadLine() ?? String.Empty;
+
+        Console.Write("Enter the new race of the patient, ENTER to skip\n>> ");
+        var raceIn = Console.ReadLine() ?? String.Empty;
+
+        Console.Write("Enter the new gender of the patient (M|F), ENTER to skip\n>> ");
+        var genIn = Console.ReadLine() ?? String.Empty;
+
+        return new Patient
+        {
+            Id = existingPatient.Id,
+            FirstName = (fnIn == "" ? existingPatient.FirstName : fnIn),
+            LastName = (lnIn == "" ? existingPatient.LastName : lnIn),
+            Address = (addrIn == "" ? existingPatient.Address : addrIn),
+            BirthDate = (bdIn == "" ? existingPatient.BirthDate : bdIn),
+            Race = (raceIn == "" ? existingPatient.Race : raceIn),
+            Gender = (genIn == "" ? existingPatient.Gender : genIn),
+        };
+    }
 }

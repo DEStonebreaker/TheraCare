@@ -1,5 +1,4 @@
 ﻿using Library.TheraCare.Models;
-using Library.TheraCare.Services;
 using Library.TheraCare.Services.Proxies;
 
 namespace GUI.TheraCare;
@@ -23,7 +22,7 @@ internal class Program
             switch (choice)
             {
                 case "1":
-                    PatientProxy.Current.AddPatient();
+                    PatientProxy.Current.Create();
                     break;
 
                 case "2":
@@ -34,7 +33,7 @@ internal class Program
                     if (PhysicianProxy.Current.Physicians.Count > 0)
                     {
                         Console.Write("\nEnter the name of the physician you wish to see the schedule for.\n>> ");
-                        string? name = Console.ReadLine() ?? "NONE";
+                        string name = Console.ReadLine() ?? "NONE";
                     }
                     else
                     {
@@ -90,7 +89,44 @@ internal class Program
                     //
                     // bool booked = chosenPhysician.AddAppointment(dayIdx, time, notes);
                     // Console.WriteLine(booked ?  "Appointment booked." : "Time not Available.");
+                    PatientProxy.Current.DisplayPatients();
+                    break;
 
+                case "6":
+                    Console.Write("\nEnter GUID of Patient\n>> ");
+                    var input = Console.ReadLine() ?? "NONE";
+                    Guid guid = Guid.Empty;
+                    if (Guid.TryParse(input, out guid))
+                    {
+                        Patient p = PatientProxy.Current.GetPatient(guid);
+                        Console.WriteLine($"{p.LastName}, {p.FirstName}: FOUND");
+                    }
+                    else
+                    {
+                        Console.WriteLine("There is no Patient with the given GUID");
+                    }
+
+                    break;
+                
+                case "7":
+                    Console.Write("\nEnter GUID of Patient\n>> ");
+                    var input2 = Console.ReadLine() ?? "NONE";
+                    Guid nguid = Guid.Empty;
+                    if (Guid.TryParse(input2, out nguid))
+                    {
+                        PatientProxy.Current.UpdatePatient(PatientProxy.Current.GetPatient(nguid));
+                    }
+                    
+                    break;
+                
+                case "8":
+                    Console.Write("\nEnter GUID of Patient\n>> ");
+                    var input3 = Console.ReadLine() ?? "NONE";
+                    Guid nNguid = Guid.Empty;
+                    if (Guid.TryParse(input3, out nNguid))
+                    {
+                        PatientProxy.Current.Delete(nNguid);
+                    }
                     break;
 
                 case "5":

@@ -1,5 +1,3 @@
-using System.Collections.Immutable;
-
 namespace Library.TheraCare.Models;
 
 public class Patient
