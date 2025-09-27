@@ -39,23 +39,43 @@
         <Panel Grid.Row="1" Background="WhiteSmoke">
             <Grid RowDefinitions="*, Auto, 2*">
                 <StackPanel Grid.Row="1" HorizontalAlignment="Center">
+                    <Border Background="#782F40" 
+                            Height="30" Width="250"
+                            CornerRadius="1"
+                            Padding="0">
+                        <TextBlock Text="User Directory"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   FontFamily="Times New Roman"
+                                   FontSize="20"
+                                   Foreground="#FFFFFF"/>
+                    </Border>
                     <Button Content="Patient Actions"
-                            FontSize="16"
+                            HorizontalContentAlignment="Center"
+                            FontSize="18"
+                            Width="250"
                             Background="Gray"
                             Foreground="Black"
-                            CornerRadius="0"
+                            CornerRadius="3"
+                            Margin="0,4,0,2"
                             HorizontalAlignment="Center"/>
                     <Button Content="Physician Actions"
+                            HorizontalContentAlignment="Center"
+                            FontSize="18"
+                            Width="250"
                             Background="Gray"
-                            FontSize="16"
                             Foreground="Black"
-                            CornerRadius="0"
+                            CornerRadius="3"
+                            Margin="0,2,0,2"
                             HorizontalAlignment="Center"/>
                     <Button Content="Exit"
+                            HorizontalContentAlignment="Center"
+                            FontSize="18"
+                            Width="250"
                             Background="Gray"
-                            FontSize="16"
                             Foreground="Black"
-                            CornerRadius="0"
+                            CornerRadius="3"
+                            Margin="0,2,0,2"
                             HorizontalAlignment="Center"/>
                 </StackPanel>
             </Grid>
