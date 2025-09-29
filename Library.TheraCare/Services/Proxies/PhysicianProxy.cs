@@ -7,7 +7,7 @@ namespace Library.TheraCare.Services.Proxies;
 public class PhysicianProxy
 {
     private static PhysicianProxy? _instance;
-    private static readonly Lock InstanceLock = new Lock();
+    private static readonly object InstanceLock = new object();
     private readonly PhysicianRepository _physicianRepository;
 
     private PhysicianProxy(PhysicianRepository physicianRepository)

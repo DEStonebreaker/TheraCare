@@ -4,9 +4,9 @@ using Avalonia.Markup.Xaml;
 
 namespace Avalonia.TheraCare.Views;
 
-public partial class PatientWindow : UserControl
+public partial class PatientMenuView : UserControl
 {
-    public PatientWindow()
+    public PatientMenuView()
     {
         InitializeComponent();
     }

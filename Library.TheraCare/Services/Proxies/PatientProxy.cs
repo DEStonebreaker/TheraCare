@@ -8,7 +8,7 @@ public class PatientProxy
 {
     private static PatientProxy? _instance;
     private readonly PatientRepository _patientRepository;
-    private static readonly Lock InstanceLock = new Lock();
+    private static readonly object InstanceLock = new object();
 
     private PatientProxy(PatientRepository patientRepository)
     {
