@@ -1,12 +1,14 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:Avalonia.TheraCare.ViewModels"
-        xmlns:v="using:Avalonia.TheraCare.Views"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
+        Width="1280"
+        Height="720"
         x:Class="Avalonia.TheraCare.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
+        xmlns:views="clr-namespace:Avalonia.TheraCare.Views"
         Icon="/Assets/avalonia-logo.ico"
         Title="COP4870 Fall 2025">
 
@@ -16,53 +18,46 @@
         <vm:MainWindowViewModel />
     </Design.DataContext>
 
-    <!-- Universal Header Bar -->
-    <!-- <Grid RowDefinitions="Auto, *"> -->
-    <!--     <Border Grid.Row="0" Background="#782F40" Height="50" Padding="10,0"> -->
-    <!--         <Grid ColumnDefinitions="*, Auto, *"> -->
-    <!--             <TextBlock Grid.Column="0" -->
-    <!--                        HorizontalAlignment="Left"/> -->
-    <!--             <TextBlock Grid.Column="1" -->
-    <!--                        Text="TheraCare Health" -->
-    <!--                        FontSize="32" -->
-    <!--                        FontFamily="Times New Roman" -->
-    <!--                        Foreground="#FFFFFF" -->
-    <!--                        VerticalAlignment="Center" /> -->
-    <!--             <Button Grid.Column="2" -->
-    <!--                     Content="[-]" -->
-    <!--                     FontSize="28" -->
-    <!--                     Foreground="#CEB888" -->
-    <!--                     Background="Transparent" -->
-    <!--                     HorizontalAlignment="Right" -->
-    <!--                     VerticalAlignment="Center" /> -->
-    <!--         </Grid> -->
-    <!--     </Border> -->
-    <!-- </Grid> -->
-    
     <!-- Dynamic Content Control -->
-    <Grid RowDefinitions="Auto, *">
-        <Border Grid.Row="0" Background="#782F40" Height="50" Padding="10,0">
-            <Grid ColumnDefinitions="*, Auto, *">
-                <TextBlock Grid.Column="0"
-                           HorizontalAlignment="Left"/>
-                <TextBlock Grid.Column="1"
-                           Text="TheraCare Health"
-                           FontSize="32"
-                           FontFamily="Times New Roman"
-                           Foreground="#FFFFFF"
-                           VerticalAlignment="Center" />
-                <Button Grid.Column="2"
-                        Content="[-]"
-                        FontSize="28"
-                        Foreground="#CEB888"
-                        Background="Transparent"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Center" />
+    <!-- Side Nav -->
+    <Grid Background="WhiteSmoke" ColumnDefinitions="Auto, *">
+        <Border Grid.Column="0" Padding="10" Background="#782F40">
+            <Grid RowDefinitions="*, Auto">
+                <StackPanel Spacing="5">
+                    <TextBlock FontFamily="Times New Roman"
+                               Foreground="White"
+                               FontSize="36"
+                               FontWeight="Bold"
+                               Text="TCH"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center" />
+                    <Button Content="Patient"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Center"
+                            Foreground="WhiteSmoke" />
+                    <Button Content="Physician"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Center"
+                            Foreground="WhiteSmoke" />
+                    <Button Content="Admin"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Center"
+                            Foreground="WhiteSmoke" />
+                    <Button Content="Home"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Center"
+                            Foreground="WhiteSmoke" />
+                </StackPanel>
+                <Button Grid.Row="1"
+                        Content="Settings"
+                        HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Center"
+                        Foreground="WhiteSmoke" />
             </Grid>
         </Border>
-        
-        <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}"/>
-        
+        <Border Grid.Column="1">
+            <ContentControl ><views:PatientView/></ContentControl>
+        </Border>
     </Grid>
-    
+
 </Window>

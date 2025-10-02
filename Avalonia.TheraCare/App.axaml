@@ -8,13 +8,15 @@
     <Application.DataTemplates>
         <local:ViewLocator />
     </Application.DataTemplates>
-
+    
     <Application.Styles>
         <FluentTheme />
         <StyleInclude Source="Styles/AppDefaultStyles.axaml"></StyleInclude>
     </Application.Styles>
 
     <Application.Resources>
-        <SolidColorBrush x:Key="PrimaryBackground">#2d2f33</SolidColorBrush>
+        <SolidColorBrush x:Key="FsuGarnet">#782F40</SolidColorBrush>
+        <SolidColorBrush x:Key="FsuGold"> #CEB888</SolidColorBrush>
+        <FontFamily x:Key="Phosphor">/Assets/Fonts/</FontFamily>
     </Application.Resources>
 </Application>

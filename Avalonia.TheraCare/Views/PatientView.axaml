@@ -3,10 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             xmlns:vm="clr-namespace:Avalonia.TheraCare.ViewModels"
-             x:DataType="vm:PatientMenuViewModel"
-             x:Class="Avalonia.TheraCare.Views.PatientMenuView">
-    
-    <TextBlock Foreground="Red">This is a test</TextBlock>
-    
+             x:Class="Avalonia.TheraCare.Views.PatientView"
+             Foreground="Red">
+    Welcome to Avalonia!
 </UserControl>
