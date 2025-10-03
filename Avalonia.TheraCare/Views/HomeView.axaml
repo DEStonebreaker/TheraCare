@@ -7,24 +7,23 @@
              x:DataType="vm:HomeViewModel"
              x:Class="Avalonia.TheraCare.Views.HomeView">
 
-    <StackPanel Width="200" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Button Content="Patient"
-                Command="{Binding GoToPatient}"
-                HorizontalAlignment="Stretch"
-                HorizontalContentAlignment="Center"
-                Foreground="WhiteSmoke" />
-        <Button Content="Physician"
-                HorizontalAlignment="Stretch"
-                HorizontalContentAlignment="Center"
-                Foreground="WhiteSmoke" />
-        <Button Content="Admin"
-                HorizontalAlignment="Stretch"
-                HorizontalContentAlignment="Center"
-                Foreground="WhiteSmoke" />
-        <Button Content="Home"
-                HorizontalAlignment="Stretch"
-                HorizontalContentAlignment="Center"
-                Foreground="WhiteSmoke" />
-    </StackPanel>
-    
+    <Border>
+        <StackPanel Width="200" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="Patient"
+                    Command="{Binding GoToPatient}"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center" />
+            <Button Content="Physician"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center" />
+            <Button Content="Admin"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center" />
+            <Button Content="Home"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center" />
+        </StackPanel>
+    </Border>
+
+
 </UserControl>
