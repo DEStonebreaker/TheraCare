@@ -14,7 +14,7 @@ public partial class MainWindowViewModel : ViewModelBase
     
     // ViewModels for Navigation
     private readonly HomeViewModel _homeViewModel = new ();
-    private readonly PatientViewModel _patientViewModel = new ();
+    // private readonly PatientViewModel _patientViewModel = new ();
     
     // Subscribe to Messages of ViewChange
     public MainWindowViewModel()
@@ -27,10 +27,11 @@ public partial class MainWindowViewModel : ViewModelBase
             });
     }
 
-    [RelayCommand]
-    private void GoToPatient()
-    {
-        CurrentViewModel = new PatientViewModel();
-    }
+    // Un-needed. Shifting navigation to respective view models.
+    // [RelayCommand]
+    // private void GoToPatient()
+    // {
+    //     CurrentViewModel = new PatientViewModel();
+    // }
     
 }

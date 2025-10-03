@@ -4,9 +4,8 @@ using CommunityToolkit.Mvvm.Messaging;
 
 namespace Avalonia.TheraCare.ViewModels;
 
-public partial class PatientViewModel : ViewModelBase
+public partial class AdminViewModel : ViewModelBase
 {
-    
     [RelayCommand]
     public void GoToHome()
     {
