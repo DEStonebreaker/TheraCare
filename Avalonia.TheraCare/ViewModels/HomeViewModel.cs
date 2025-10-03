@@ -4,11 +4,11 @@ using CommunityToolkit.Mvvm.Messaging;
 
 namespace Avalonia.TheraCare.ViewModels;
 
-public partial class PatientViewModel : ViewModelBase
+public partial class HomeViewModel : ViewModelBase
 {
     [RelayCommand]
-    public void GoToHome()
+    public void GoToPatient()
     {
-        WeakReferenceMessenger.Default.Send(new ViewChangeMessage(new HomeViewModel()));
+        WeakReferenceMessenger.Default.Send(new ViewChangeMessage(new PatientViewModel()));
     }
 }

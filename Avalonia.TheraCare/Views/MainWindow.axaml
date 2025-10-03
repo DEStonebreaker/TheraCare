@@ -19,45 +19,24 @@
     </Design.DataContext>
 
     <!-- Dynamic Content Control -->
-    <!-- Side Nav -->
-    <Grid Background="WhiteSmoke" ColumnDefinitions="Auto, *">
+    <!-- Universal Header -->
+    <Grid Background="WhiteSmoke" RowDefinitions="Auto, *">
         <Border Grid.Column="0" Padding="10" Background="#782F40">
-            <Grid RowDefinitions="*, Auto">
-                <StackPanel Spacing="5">
-                    <TextBlock FontFamily="Times New Roman"
-                               Foreground="White"
-                               FontSize="36"
-                               FontWeight="Bold"
-                               Text="TCH"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center" />
-                    <Button Content="Patient"
-                            HorizontalAlignment="Stretch"
-                            HorizontalContentAlignment="Center"
-                            Foreground="WhiteSmoke" />
-                    <Button Content="Physician"
-                            HorizontalAlignment="Stretch"
-                            HorizontalContentAlignment="Center"
-                            Foreground="WhiteSmoke" />
-                    <Button Content="Admin"
-                            HorizontalAlignment="Stretch"
-                            HorizontalContentAlignment="Center"
-                            Foreground="WhiteSmoke" />
-                    <Button Content="Home"
-                            HorizontalAlignment="Stretch"
-                            HorizontalContentAlignment="Center"
-                            Foreground="WhiteSmoke" />
-                </StackPanel>
-                <Button Grid.Row="1"
-                        Content="Settings"
-                        HorizontalAlignment="Stretch"
-                        HorizontalContentAlignment="Center"
-                        Foreground="WhiteSmoke" />
+            <Grid RowDefinitions="24">
+                <TextBlock FontFamily="Times New Roman"
+                                   Foreground="White"
+                                   FontSize="24"
+                                   FontWeight="Bold"
+                                   Text="TheraCare Health"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center" />
             </Grid>
         </Border>
-        <Border Grid.Column="1">
-            <ContentControl ><views:PatientView/></ContentControl>
-        </Border>
+
+        <Grid Grid.Row="1">
+            <ContentControl Content="{Binding CurrentViewModel}"/>
+        </Grid>
+        
     </Grid>
 
 </Window>
