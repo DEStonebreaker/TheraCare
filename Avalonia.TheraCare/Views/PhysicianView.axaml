@@ -6,20 +6,25 @@
              xmlns:vm="clr-namespace:Avalonia.TheraCare.ViewModels"
              x:DataType="vm:PhysicianViewModel"
              x:Class="Avalonia.TheraCare.Views.PhysicianView">
-    
+
     <Border Background="WhiteSmoke">
-        <StackPanel HorizontalAlignment="Center"
+        <StackPanel Width="250"
+                    HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Spacing="5">
-            <TextBlock HorizontalAlignment="Center"
-                       VerticalAlignment="Center"
-                       Foreground="Black"
-                       Text="Under Construction"/>
+            <Button Content="Create Physician"
+                    Command="{Binding GoToCreation}"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center" />
+            <Button Content="Physician Management"
+                    Command="{Binding GoToPhysicianManagement}"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center" />
             <Button Content="Back"
                     Command="{Binding GoToHome}"
-                    HorizontalAlignment="Center"
-                    HorizontalContentAlignment="Center"/>
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center" />
         </StackPanel>
     </Border>
-    
+
 </UserControl>

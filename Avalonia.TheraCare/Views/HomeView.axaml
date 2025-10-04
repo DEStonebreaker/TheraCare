@@ -18,13 +18,10 @@
                     Command="{Binding GoToPhysician}"
                     HorizontalAlignment="Stretch"
                     HorizontalContentAlignment="Center" />
-            <Button Content="Admin"
+            <Button Content="Appt. Management"
                     Command="{Binding GoToAdmin}"
                     HorizontalAlignment="Stretch"
                     HorizontalContentAlignment="Center" />
-            <!-- <Button Content="The nothing button" -->
-            <!--         HorizontalAlignment="Stretch" -->
-            <!--         HorizontalContentAlignment="Center" /> -->
         </StackPanel>
     </Border>
 

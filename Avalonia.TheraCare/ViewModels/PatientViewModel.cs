@@ -12,4 +12,16 @@ public partial class PatientViewModel : ViewModelBase
     {
         WeakReferenceMessenger.Default.Send(new ViewChangeMessage(new HomeViewModel()));
     }
+
+    [RelayCommand]
+    public void GoToPatientCreation()
+    {
+        WeakReferenceMessenger.Default.Send(new ViewChangeMessage(new PatientCreationViewModel()));
+    }
+
+    [RelayCommand]
+    public void GoToPatientManagement()
+    {
+        WeakReferenceMessenger.Default.Send(new ViewChangeMessage(new PatientManagementViewModel()));
+    }
 }

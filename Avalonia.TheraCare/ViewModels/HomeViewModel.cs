@@ -21,7 +21,7 @@ public partial class HomeViewModel : ViewModelBase
     [RelayCommand]
     public void GoToAdmin()
     {
-        WeakReferenceMessenger.Default.Send(new ViewChangeMessage(new AdminViewModel()));
+        WeakReferenceMessenger.Default.Send(new ViewChangeMessage(new AppointmentViewModel()));
     }
     
 

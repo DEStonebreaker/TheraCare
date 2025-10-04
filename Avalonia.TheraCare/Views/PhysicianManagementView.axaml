@@ -1,0 +1,57 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:vm="clr-namespace:Avalonia.TheraCare.ViewModels"
+             x:DataType="vm:PhysicianManagementViewModel"
+             x:Class="Avalonia.TheraCare.Views.PhysicianManagementView">
+    
+    <Border>
+        <Grid ColumnDefinitions="Auto, *, Auto"
+              Background="WhiteSmoke"
+              ShowGridLines="True">
+            <Grid Column="1"
+                  Width="800"
+                  ShowGridLines="True"
+                  ColumnDefinitions="Auto, *, Auto"
+                  HorizontalAlignment="Center">
+                <StackPanel Grid.Column="1"
+                            Margin="8"
+                            Width="750"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Spacing="10">
+                    <TextBlock Foreground="Black"
+                               Text="Patient Management"
+                               HorizontalAlignment="Center" />
+                    <Border HorizontalAlignment="Center"
+                            Height="400">
+                        <ListBox Width="750"
+                                 ItemsSource="{Binding Users}" />
+                    </Border>
+
+                    <Grid ColumnDefinitions="Auto, *, Auto, Auto, Auto"
+                          ColumnSpacing="8"
+                          ShowGridLines="False">
+                        <Button Grid.Column="0" Content="Go Back"
+                                Command="{Binding GoBack}"
+                                HorizontalAlignment="Left" />
+                        <TextBox Grid.Column="2"
+                                Watermark="Search by name"
+                                Width="200"
+                                HorizontalAlignment="Right" />
+                        <Button Grid.Column="3"
+                                Content="Edit"
+                                HorizontalAlignment="Right" />
+                        <Button Grid.Column="4"
+                                Content="Delete"
+                                HorizontalAlignment="Right" />
+                    </Grid>
+
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Border>
+    
+</UserControl>

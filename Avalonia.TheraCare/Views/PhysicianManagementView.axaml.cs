@@ -4,9 +4,9 @@ using Avalonia.Markup.Xaml;
 
 namespace Avalonia.TheraCare.Views;
 
-public partial class AdminView : UserControl
+public partial class PhysicianManagementView : UserControl
 {
-    public AdminView()
+    public PhysicianManagementView()
     {
         InitializeComponent();
     }
