@@ -7,12 +7,11 @@ namespace Library.TheraCare.Services.Proxies;
 public class PatientProxy
 {
     private static PatientProxy? _instance;
-    private readonly PatientRepository _patientRepository;
+    private List<Patient?> _patients = new ();
     private static readonly object InstanceLock = new object();
 
-    private PatientProxy(PatientRepository patientRepository)
+    private PatientProxy()
     {
-        _patientRepository = patientRepository;
     }
     
     public static PatientProxy Current
@@ -21,48 +20,76 @@ public class PatientProxy
         {
             lock (InstanceLock)
             {
-                _instance ??= new PatientProxy(new PatientRepository()); // if null, start proxy.
+                _instance ??= new PatientProxy(); // if null, start proxy.
             }
 
             return _instance;
         }
     }
 
-    public IEnumerable<Patient?> GetPatients => _patientRepository.GetAll();
+    public IEnumerable<Patient?> GetPatients => _patients;
 
-    public Patient Create()
+    public Patient Create(Patient patient)
     {
-        Patient patient = PatientFactory.FromCli();
-        patient = _patientRepository.Create(patient);
-        return patient;
+        lock (InstanceLock)
+        {
+            _patients.Add(patient);
+            return patient;
+        }
     }
 
-    public Patient GetPatient(Guid id)
+    public Patient Update(Patient patient)
     {
-        Patient? patient = _patientRepository.GetById(id);
-        if (patient == null)
+        lock (InstanceLock)
         {
-            throw new ArgumentNullException(nameof(patient));
+            int index = _patients.FindIndex(p => p?.Id == patient.Id);
+            if (index != -1)
+            {
+                _patients[index] = patient;
+                return patient;
+            }
         }
 
         return patient;
     }
 
-    public void DisplayPatients()
+    public Patient GetById(Guid id)
     {
-        _patientRepository.Display();
+        lock (InstanceLock)
+        {
+            Patient? patient = _patients.FirstOrDefault(p => p?.Id == id);
+            return patient;
+        }
     }
 
-    public bool UpdatePatient(Guid patientId)
+    public IEnumerable<Patient?> GetAll()
     {
-        var patient = _patientRepository.GetById(patientId);
-        Patient newPatient = PatientFactory.PatientUpdater(patient);
-        _patientRepository.Update(newPatient);
-        return true;
+        lock (InstanceLock)
+        {
+            return _patients;
+        }
     }
 
     public void Delete(Guid id)
     {
-        _patientRepository.Delete(id);
+        lock (InstanceLock)
+        {
+            int index = _patients.FindIndex(p => p?.Id == id);
+            if (index != -1)
+            {
+                _patients.RemoveAt(index);
+            }
+        }
+    }
+
+    public void Display()
+    {
+        lock (InstanceLock)
+        {
+            foreach (var patient in _patients)
+            {
+                Console.WriteLine($"{patient?.Id}: {patient?.LastName}, {patient?.FirstName}");
+            }
+        }
     }
 }

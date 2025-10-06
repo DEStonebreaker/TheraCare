@@ -29,4 +29,8 @@
       <Folder Include="Assets\Fonts\" />
       <Folder Include="Models\" />
     </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Library.TheraCare\Library.TheraCare.csproj" />
+    </ItemGroup>
 </Project>
