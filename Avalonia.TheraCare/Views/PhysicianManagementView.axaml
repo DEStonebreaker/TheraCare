@@ -28,7 +28,8 @@
                     <Border HorizontalAlignment="Center"
                             Height="400">
                         <ListBox Width="750"
-                                 ItemsSource="{Binding Users}" />
+                                 ItemsSource="{Binding Physicians}"
+                                 SelectedItem="{Binding SelectedPhysician}"/>
                     </Border>
 
                     <Grid ColumnDefinitions="Auto, *, Auto, Auto, Auto"
@@ -43,9 +44,11 @@
                                 HorizontalAlignment="Right" />
                         <Button Grid.Column="3"
                                 Content="Edit"
+                                Command="{Binding EditPhysician}"
                                 HorizontalAlignment="Right" />
                         <Button Grid.Column="4"
                                 Content="Delete"
+                                Command="{Binding DeletePhysician}"
                                 HorizontalAlignment="Right" />
                     </Grid>
 

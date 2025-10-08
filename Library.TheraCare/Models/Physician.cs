@@ -12,18 +12,8 @@ public class Physician
 
     private List<List<Appointment>> _Appointments = new(); // Tools.BuildWeekSchedule();
 
-    // public bool AddAppointment(int dayIdx, TimeSpan time, string? notes = null)
-    // {
-    //     if (dayIdx < 0 || dayIdx > 4) return false;
-    //     // if (_Appointments == null) return false;
-    //
-    //     var daySchedule = _Appointments[dayIdx];
-    //     var slot = daySchedule.FirstOrDefault(a => a.StartTime.TimeOfDay == time);
-    //     if (slot == null || slot.IsBooked) return false;
-    //
-    //     slot.IsBooked = true;
-    //     slot.Notes = notes;
-    //
-    //     return true;
-    // }
+    public override string ToString()
+    {
+        return $"Dr. {FirstName} {LastName} - {Specializations} (License: {LicenseNumber})";
+    }
 }

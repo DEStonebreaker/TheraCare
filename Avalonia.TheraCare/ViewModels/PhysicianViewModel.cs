@@ -1,11 +1,15 @@
 using Avalonia.TheraCare.Messages;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using Library.TheraCare.Models;
+using Library.TheraCare.Services.Proxies;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Avalonia.TheraCare.ViewModels;
 
 public partial class PhysicianViewModel : ViewModelBase
 {
+
     [RelayCommand]
     public void GoToHome()
     {

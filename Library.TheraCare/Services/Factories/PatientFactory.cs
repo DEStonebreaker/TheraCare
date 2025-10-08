@@ -67,4 +67,19 @@ public static class PatientFactory
             Gender = (genIn == "" ? existingPatient.Gender : Tools.StrNormalize(genIn)),
         };
     }
+
+    public static Patient FromArgs(string? fnIn, string? lnIn, string? addrIn, string? bdIn, string? raceIn,
+        string? genIn)
+    {
+        return new Patient
+        {
+            Id = Guid.NewGuid(),
+            FirstName = Tools.StrNormalize(fnIn),
+            LastName = Tools.StrNormalize(lnIn),
+            Address = Tools.StrNormalize(addrIn),
+            BirthDate = Tools.StrNormalize(bdIn),
+            Race = Tools.StrNormalize(raceIn),
+            Gender = Tools.StrNormalize(genIn)
+        };
+    }
 }

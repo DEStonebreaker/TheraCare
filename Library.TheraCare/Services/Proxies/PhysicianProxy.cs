@@ -1,72 +1,112 @@
+using System.Collections.ObjectModel;
 using Library.TheraCare.Models;
 using Library.TheraCare.Services.Factories;
-using Library.TheraCare.Services.Repositories;
 
 namespace Library.TheraCare.Services.Proxies;
 
 public class PhysicianProxy
 {
     private static PhysicianProxy? _instance;
-    private static readonly object InstanceLock = new object();
-    private readonly PhysicianRepository _physicianRepository;
+    private static readonly object _lock = new object();
+    private readonly List<Physician> _physicians = new List<Physician>();
 
-    private PhysicianProxy(PhysicianRepository physicianRepository)
+    private PhysicianProxy()
     {
-        _physicianRepository = physicianRepository;
     }
 
     public static PhysicianProxy Current
     {
         get
         {
-            lock (InstanceLock)
+            lock (_lock)
             {
-                _instance ??= new PhysicianProxy(new PhysicianRepository());
+                _instance ??= new PhysicianProxy();
             }
 
             return _instance;
         }
     }
 
-    public IEnumerable<Physician?> Physicians => _physicianRepository.GetAll();
-
-    public Physician CreatePhysician()
+    public IEnumerable<Physician> Physicians
     {
-        Physician physician = PhysicianFactory.FromCli();
-        _physicianRepository.Create(physician);
-        return physician;
+        get
+        {
+            lock (_lock)
+            {
+                return _physicians.ToList(); // Return a copy to prevent external modification
+            }
+        }
+    }
+
+    public Physician CreatePhysician(Physician physician)
+    {
+        lock (_lock)
+        {
+            // Physician physician = PhysicianFactory.FromCli();
+            _physicians.Add(physician);
+            return physician;
+        }
+    }
+
+    public ObservableCollection<Physician> GetPhysicians()
+    {
+        return new ObservableCollection<Physician>(_physicians);
     }
 
     public Physician? GetPhysician(Guid id)
     {
-        Physician? physician = _physicianRepository.GetById(id);
-        if (physician == null)
+        lock (_lock)
         {
-            throw new ArgumentNullException(nameof(physician));
+            return _physicians.FirstOrDefault(p => p.Id == id);
         }
-        return physician;
+    }
+
+    public bool UpdatePhysician(Physician physician)
+    {
+        lock (_lock)
+        {
+            var physician_l = _physicians.FirstOrDefault(p => p.Id == physician.Id);
+            if (physician_l == null)
+            {
+                return false;
+            }
+
+            Physician updatedPhysician = physician_l;
+
+            int index = _physicians.FindIndex(p => p.Id == physician.Id);
+            if (index != -1)
+            {
+                _physicians[index] = updatedPhysician;
+                return true;
+            }
+
+            return false;
+        }
+    }
+
+    public bool DeletePhysician(Guid id)
+    {
+        lock (_lock)
+        {
+            int index = _physicians.FindIndex(p => p.Id == id);
+            if (index != -1)
+            {
+                _physicians.RemoveAt(index);
+                return true;
+            }
+
+            return false;
+        }
     }
 
     public void DisplayPhysicians()
     {
-        _physicianRepository.Display();
-    }
-
-    public bool UpdatePhysician(Guid id)
-    {
-        var physician = _physicianRepository.GetById(id);
-        if (physician == null)
+        lock (_lock)
         {
-            throw new ArgumentNullException(nameof(physician));
+            foreach (var physician in _physicians)
+            {
+                Console.WriteLine($"{physician.Id}: {physician.LastName}, {physician.FirstName}");
+            }
         }
-        Physician newPhysician =  PhysicianFactory.PhysicianUpdater(physician);
-        _physicianRepository.Update(newPhysician);
-        
-        return true;
-    }
-
-    public void DeletePhysician(Guid id)
-    {
-        _physicianRepository.Delete(id);
     }
 }

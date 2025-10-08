@@ -3,5 +3,4 @@ namespace Avalonia.TheraCare.Messages;
 
 public class PatientCreationMessage
 {
-    
 }

@@ -29,11 +29,13 @@ public partial class MainWindowViewModel : ViewModelBase
             });
     }
 
+    private readonly PhysicianProxy _proxy;
+
     // Un-needed. Shifting navigation to respective view models.
     // [RelayCommand]
     // private void GoToPatient()
     // {
     //     CurrentViewModel = new PatientViewModel();
     // }
-    
+
 }

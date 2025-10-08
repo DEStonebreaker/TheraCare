@@ -7,6 +7,8 @@ using Avalonia.Markup.Xaml;
 using Avalonia.TheraCare.ViewModels;
 using Avalonia.TheraCare.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Library.TheraCare.Services.Proxies;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Avalonia.TheraCare;
 

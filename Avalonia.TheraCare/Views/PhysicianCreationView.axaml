@@ -25,15 +25,18 @@
                     <TextBox
                         Width="250"
                         Height="24"
-                        Watermark="First Name" />
+                        Watermark="First Name" 
+                        Text="{Binding FirstName}"/>
                     <TextBox
                         Width="250"
                         Height="24"
-                        Watermark="Last Name" />
+                        Watermark="Last Name" 
+                        Text = "{Binding LastName}"/>
                     <TextBox
                         Width="250"
                         Height="24"
-                        Watermark="License Number" />
+                        Watermark="License Number" 
+                        Text = "{Binding LicenseNumber}"/>
                     <CalendarDatePicker
                         HorizontalAlignment="Right"
                         SelectedDateFormat="Short"
@@ -43,7 +46,8 @@
                         Height="50"
                         Watermark="Specializations"
                         TextWrapping="Wrap"
-                        AcceptsReturn="True" />
+                        AcceptsReturn="True" 
+                        Text="{Binding Specialization}"/>
                     <Grid ColumnDefinitions="Auto, *, Auto">
                         <Button Grid.Column="0"
                                 HorizontalAlignment="Left"
@@ -55,7 +59,8 @@
                                 HorizontalAlignment="Right"
                                 HorizontalContentAlignment="Center"
                                 Width="80"
-                                Content="Submit" />
+                                Content="Submit"
+                                Command="{Binding Submit}"/>
                     </Grid>
 
                 </StackPanel>
