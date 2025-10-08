@@ -1,6 +1,8 @@
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Avalonia.TheraCare.Messages;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -35,10 +37,8 @@ public partial class PhysicianManagementViewModel : ViewModelBase
     public void EditPhysician()
     {
         if (SelectedPhysician == null) return;
-        Guid tmpId = SelectedPhysician.Id;
-        int idx = Physicians.IndexOf(SelectedPhysician);
         WeakReferenceMessenger.Default.Send(new ViewChangeMessage(new PhysicianCreationViewModel(SelectedPhysician)));
-        Physicians[idx] = PhysicianProxy.Current.GetPhysician(tmpId);
+        NotifyPropertyChanged(nameof(Physicians));
     }
 
     [RelayCommand]
@@ -49,5 +49,11 @@ public partial class PhysicianManagementViewModel : ViewModelBase
         PhysicianProxy.Current.DeletePhysician(SelectedPhysician.Id);
         Physicians.Remove(SelectedPhysician);
         SelectedPhysician = null;
+    }
+    
+    public event PropertyChangedEventHandler? PropertyChanged;
+    private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

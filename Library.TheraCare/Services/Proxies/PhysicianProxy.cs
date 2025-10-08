@@ -65,18 +65,16 @@ public class PhysicianProxy
     {
         lock (_lock)
         {
-            var physician_l = _physicians.FirstOrDefault(p => p.Id == physician.Id);
-            if (physician_l == null)
+            var phys = _physicians.FirstOrDefault(p => p.Id == physician.Id);
+            if (phys == null)
             {
                 return false;
             }
 
-            Physician updatedPhysician = physician_l;
-
             int index = _physicians.FindIndex(p => p.Id == physician.Id);
             if (index != -1)
             {
-                _physicians[index] = updatedPhysician;
+                _physicians[index] = physician;
                 return true;
             }
 

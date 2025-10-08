@@ -1,4 +1,6 @@
 using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using Avalonia.Platform;
 using Avalonia.TheraCare.Messages;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -18,6 +20,7 @@ public partial class PhysicianCreationViewModel : ViewModelBase
     [ObservableProperty] private string? _licenseNumber;
     [ObservableProperty] private string? _gradDate;
     [ObservableProperty] private string? _specialization;
+    [ObservableProperty] private string? _updated;
     private bool updateMode = false;
 
     public PhysicianCreationViewModel()
@@ -42,6 +45,11 @@ public partial class PhysicianCreationViewModel : ViewModelBase
         {
             var Phys = PhysicianFactory.FromArgs(FirstName, LastName, LicenseNumber, GradDate, Specialization);
             PhysicianProxy.Current.CreatePhysician(Phys);
+            FirstName = string.Empty;
+            LastName = string.Empty;
+            LicenseNumber = string.Empty;
+            GradDate = string.Empty;
+            Specialization = string.Empty;
         }
         else
         {
@@ -49,18 +57,23 @@ public partial class PhysicianCreationViewModel : ViewModelBase
                 Specialization);
             PhysicianProxy.Current.UpdatePhysician(Phys);
         }
-
-        FirstName = string.Empty;
-        LastName = string.Empty;
-        LicenseNumber = string.Empty;
-        GradDate = string.Empty;
-        Specialization = string.Empty;
-        updateMode = false;
     }
 
     [RelayCommand]
     public void GoBack()
     {
+        if (updateMode == true)
+        {
+            updateMode = false;
+            WeakReferenceMessenger.Default.Send(new ViewChangeMessage(new PhysicianManagementViewModel()));
+            FirstName = string.Empty;
+            LastName = string.Empty;
+            LicenseNumber = string.Empty;
+            GradDate = string.Empty;
+            Specialization = string.Empty;
+            return;
+        }
+
         WeakReferenceMessenger.Default.Send(new ViewChangeMessage(new PhysicianViewModel()));
     }
 }
