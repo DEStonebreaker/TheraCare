@@ -18,10 +18,11 @@ public partial class PhysicianCreationViewModel : ViewModelBase
     [ObservableProperty] private string? _firstName;
     [ObservableProperty] private string? _lastName;
     [ObservableProperty] private string? _licenseNumber;
-    [ObservableProperty] private string? _gradDate;
+    [ObservableProperty] private DateTime? _gradDate;
     [ObservableProperty] private string? _specialization;
     [ObservableProperty] private string? _updated;
     [ObservableProperty] private string? _title = "Physician Creation";
+    private bool canSubmit { get; set; } = true;
     private bool updateMode = false;
 
     public PhysicianCreationViewModel()
@@ -56,6 +57,7 @@ public partial class PhysicianCreationViewModel : ViewModelBase
             PhysicianProxy.Current.UpdatePhysician(Phys);
             Title = "Successfully Updated Physician";
             ClearFields();
+            canSubmit = false;
         }
     }
 
@@ -78,7 +80,7 @@ public partial class PhysicianCreationViewModel : ViewModelBase
         FirstName = string.Empty;
         LastName = string.Empty;
         LicenseNumber = string.Empty;
-        GradDate = string.Empty;
+        GradDate = null;
         Specialization = string.Empty;
     }
 }

@@ -27,7 +27,7 @@ public class PhysicianFactory
             FirstName = Tools.StrNormalize(firstName),
             LastName = Tools.StrNormalize(lastName),
             LicenseNumber = Tools.StrNormalize(licenseNumber),
-            GraduationDate = Tools.StrNormalize(graduationDate),
+            GraduationDate = DateTime.TryParse(graduationDate, out var gradDate) ? gradDate : null,
             Specializations = Tools.StrNormalize(specializations)
         };
     }
@@ -55,12 +55,12 @@ public class PhysicianFactory
             FirstName = (firstName == "" ? existingPhysician.FirstName : Tools.StrNormalize(firstName)),
             LastName = (firstName == "" ? existingPhysician.FirstName : Tools.StrNormalize(lastName)),
             LicenseNumber = (firstName == "" ? existingPhysician.FirstName : Tools.StrNormalize(licenseNumber)),
-            GraduationDate = (firstName == "" ? existingPhysician.FirstName : Tools.StrNormalize(graduationDate)),
+            GraduationDate = (DateTime.TryParse(graduationDate, out var gradDate) ? gradDate : null),
             Specializations = (firstName == "" ? existingPhysician.FirstName : Tools.StrNormalize(specializations))
         };
     }
 
-    public static Physician FromArgs(string? firstName, string? lastName, string? licenseNumber, string? graduationDate,
+    public static Physician FromArgs(string? firstName, string? lastName, string? licenseNumber, DateTime? graduationDate,
         string? specializations)
     {
         return new Physician
@@ -69,13 +69,13 @@ public class PhysicianFactory
             FirstName = Tools.StrNormalize(firstName),
             LastName = Tools.StrNormalize(lastName),
             LicenseNumber = Tools.StrNormalize(licenseNumber),
-            GraduationDate = Tools.StrNormalize(graduationDate),
+            GraduationDate = graduationDate,
             Specializations = Tools.StrNormalize(specializations)
         };
     }
 
     public static Physician FromArgsUpdater(Guid inId, string? firstName, string? lastName, string? licenseNumber,
-        string? graduationDate, string? specializations)
+        DateTime? graduationDate, string? specializations)
     {
         return new Physician
         {
@@ -83,7 +83,7 @@ public class PhysicianFactory
             FirstName = Tools.StrNormalize(firstName),
             LastName = Tools.StrNormalize(lastName),
             LicenseNumber = Tools.StrNormalize(licenseNumber),
-            GraduationDate = Tools.StrNormalize(graduationDate),
+            GraduationDate = graduationDate,
             Specializations = Tools.StrNormalize(specializations)
         };
     }
