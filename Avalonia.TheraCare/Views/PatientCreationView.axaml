@@ -12,7 +12,7 @@
               Background="WhiteSmoke">
             <Grid Grid.Column="1"
                   Width="800"
-                  ShowGridLines="True"
+                  ShowGridLines="False"
                   ColumnDefinitions="Auto, *, Auto"
                   HorizontalAlignment="Center">
                 <StackPanel Grid.Column="1"
@@ -20,52 +20,77 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Spacing="10">
-                    <TextBlock Text="Patient Creation"
+                    <TextBlock Text="{Binding Title}"
                                HorizontalAlignment="Center" />
                     <TextBox
                         Width="250"
                         Height="24"
-                        Watermark="First Name" />
+                        Watermark="First Name"
+                        Text="{Binding FirstName}"/>
                     <TextBox
                         Width="250"
                         Height="24"
-                        Watermark="Last Name" />
+                        Watermark="Last Name"
+                        Text="{Binding LastName}"/>
                     <TextBox
                         Width="250"
                         Height="24"
-                        Watermark="Address" />
-                    <CalendarDatePicker
-                        HorizontalAlignment="Right"
-                        SelectedDateFormat="Short"
-                        Margin="0,0,0,5"/>
-                    <TextBox
-                        Width="250"
-                        Height="24"
-                        Watermark="Race" />
+                        Watermark="Address" 
+                        Text = "{Binding Address}"/>
+                    <Grid ColumnDefinitions="*, Auto">
+                        <TextBlock Grid.Column="0"
+                                   Text="Date of Birth:     "
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center" />
+                        <CalendarDatePicker Grid.Column="1"
+                                            Width="120"
+                                            HorizontalAlignment="Right"
+                                            SelectedDateFormat="Short"
+                                            Margin="0,0,0,0"
+                                            SelectedDate="{Binding BirthDate}"/>
+                    </Grid>
+                    <Grid ColumnDefinitions="Auto, *, Auto">
+                        <!-- <ComboBox Grid.Column="0" -->
+                        <!--           VerticalAlignment="Center" -->
+                        <!--           Width="100" -->
+                        <!--           PlaceholderText="Sex"> -->
+                        <!--     <ComboBoxItem Content="Male"/> -->
+                        <!--     <ComboBoxItem Content="Female"/> -->
+                        <!-- </ComboBox> -->
+                        <TextBox Grid.Column="2"
+                                 Width="120"
+                                 Height="24"
+                                 Watermark="Race"
+                                 Text="{Binding Race}"/>
+                    </Grid>
+
                     <TextBox
                         Width="250"
                         Height="50"
                         Watermark="Medications"
                         TextWrapping="Wrap"
-                        AcceptsReturn="True" />
+                        AcceptsReturn="True"
+                        Text="{Binding Medications}"/>
                     <TextBox
                         Width="250"
                         Height="50"
-                        Watermark="Notes"
+                        Watermark="Diagnosis'"
                         TextWrapping="Wrap"
-                        AcceptsReturn="True" />
+                        AcceptsReturn="True" 
+                        Text="{Binding Diagnosis}"/>
                     <Grid ColumnDefinitions="Auto, *, Auto">
                         <Button Grid.Column="0"
                                 HorizontalAlignment="Left"
                                 HorizontalContentAlignment="Center"
                                 Width="60"
-                                Content="Back" 
-                                Command="{Binding GoBack}"/>
+                                Content="Back"
+                                Command="{Binding GoBack}" />
                         <Button Grid.Column="2"
                                 HorizontalAlignment="Right"
                                 HorizontalContentAlignment="Center"
                                 Width="80"
-                                Content="Submit" />
+                                Content="Submit" 
+                                Command="{Binding Submit}"/>
                     </Grid>
 
                 </StackPanel>

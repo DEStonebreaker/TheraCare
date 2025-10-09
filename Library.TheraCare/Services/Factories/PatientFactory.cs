@@ -30,7 +30,7 @@ public static class PatientFactory
             FirstName = Tools.StrNormalize(fnIn),
             LastName = Tools.StrNormalize(lnIn),
             Address = Tools.StrNormalize(addrIn),
-            BirthDate = Tools.StrNormalize(bdIn),
+            BirthDate = DateTime.TryParse(bdIn, out var birthDate) ? birthDate : null,
             Race = Tools.StrNormalize(raceIn),
             Gender = Tools.StrNormalize(genIn)
         };
@@ -62,14 +62,14 @@ public static class PatientFactory
             FirstName = (fnIn == "" ? existingPatient.FirstName : Tools.StrNormalize(fnIn)),
             LastName = (lnIn == "" ? existingPatient.LastName : Tools.StrNormalize(lnIn)),
             Address = (addrIn == "" ? existingPatient.Address : Tools.StrNormalize(addrIn)),
-            BirthDate = (bdIn == "" ? existingPatient.BirthDate : Tools.StrNormalize(bdIn)),
+            BirthDate = (bdIn == "" ? existingPatient.BirthDate : DateTime.TryParse(bdIn, out var birthDate) ? birthDate : null),
             Race = (raceIn == "" ? existingPatient.Race : Tools.StrNormalize(raceIn)),
             Gender = (genIn == "" ? existingPatient.Gender : Tools.StrNormalize(genIn)),
         };
     }
 
-    public static Patient FromArgs(string? fnIn, string? lnIn, string? addrIn, string? bdIn, string? raceIn,
-        string? genIn)
+    public static Patient FromArgs(string? fnIn, string? lnIn, string? addrIn, DateTime? bdIn, string? raceIn,
+        string? genIn, string? diagnosisIn, string? medsIn)
     {
         return new Patient
         {
@@ -77,9 +77,28 @@ public static class PatientFactory
             FirstName = Tools.StrNormalize(fnIn),
             LastName = Tools.StrNormalize(lnIn),
             Address = Tools.StrNormalize(addrIn),
-            BirthDate = Tools.StrNormalize(bdIn),
+            BirthDate = bdIn,
             Race = Tools.StrNormalize(raceIn),
-            Gender = Tools.StrNormalize(genIn)
+            Gender = Tools.StrNormalize(genIn),
+            Diagnosis = Tools.StrNormalize(diagnosisIn),
+            Medications = Tools.StrNormalize(medsIn),
+        };
+    }
+    
+    public static Patient FromArgsUpdater(Guid inId, string? fnIn, string? lnIn, string? addrIn, DateTime? bdIn, string? raceIn,
+        string? genIn, string? diagnosisIn, string? medsIn)
+    {
+        return new Patient
+        {
+            Id = inId,
+            FirstName = Tools.StrNormalize(fnIn),
+            LastName = Tools.StrNormalize(lnIn),
+            Address = Tools.StrNormalize(addrIn),
+            BirthDate = bdIn,
+            Race = Tools.StrNormalize(raceIn),
+            Gender = Tools.StrNormalize(genIn),
+            Diagnosis = Tools.StrNormalize(diagnosisIn),
+            Medications = Tools.StrNormalize(medsIn),
         };
     }
 }

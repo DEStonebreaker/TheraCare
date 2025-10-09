@@ -37,11 +37,17 @@
                         Height="24"
                         Watermark="License Number" 
                         Text = "{Binding LicenseNumber}"/>
-                    <CalendarDatePicker
-                        HorizontalAlignment="Right"
-                        SelectedDateFormat="Short"
-                        SelectedDate="{Binding GradDate}"
-                        Margin="0,0,0,5"/>
+                    <Grid ColumnDefinitions="*, Auto">
+                        <TextBlock Grid.Column="0"
+                                   Text="Graduation Date:"
+                                   VerticalAlignment="Center"/>
+                        <CalendarDatePicker Grid.Column="1"
+                                               HorizontalAlignment="Right"
+                                               SelectedDateFormat="Short"
+                                               Width="120"
+                                               SelectedDate="{Binding GradDate}"
+                                               Margin="0,0,0,0"/> 
+                    </Grid>
                     <TextBox
                         Width="250"
                         Height="50"

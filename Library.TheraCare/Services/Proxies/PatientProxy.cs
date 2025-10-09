@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using Library.TheraCare.Models;
 using Library.TheraCare.Services.Factories;
 
@@ -37,11 +38,11 @@ public class PatientProxy
         }
     }
 
-    public Patient CreatePatient()
+    public Patient CreatePatient(Patient patient)
     {
         lock (_lock)
         {
-            Patient patient = PatientFactory.FromCli();
+            // Patient patient = PatientFactory.FromCli();
             _patients.Add(patient);
             return patient;
         }
@@ -54,27 +55,30 @@ public class PatientProxy
             return _patients.FirstOrDefault(p => p.Id == id);
         }
     }
+    
+    public ObservableCollection<Patient> GetPatients()
+    {
+        return new ObservableCollection<Patient>(_patients);
+    }
 
-    public bool UpdatePatient(Guid id)
+    public bool UpdatePatient(Patient patient)
     {
         lock (_lock)
         {
-            var patient = _patients.FirstOrDefault(p => p.Id == id);
-            if (patient == null)
+            var pati = _patients.FirstOrDefault(p => p.Id == patient.Id);
+            if (pati == null)
             {
                 return false;
             }
 
-            Patient updatedPatient = PatientFactory.PatientUpdater(patient);
-
-            int index = _patients.FindIndex(p => p.Id == id);
+            int index = _patients.FindIndex(p => p.Id == patient.Id);
             if (index != -1)
             {
-                _patients[index] = updatedPatient;
+                _patients[index] = patient;
                 return true;
             }
 
-            return false;
+            return false;   
         }
     }
 
