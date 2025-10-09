@@ -5,7 +5,6 @@ public class Physician
     public Guid Id { get; init; } = Guid.NewGuid();
     public string FirstName { get; init; } = string.Empty;
     public string LastName { get; init; } = string.Empty;
-
     public string LicenseNumber { get; init; } = string.Empty;
     public string GraduationDate { get; init; } = string.Empty;
     public string Specializations { get; init; } = string.Empty;

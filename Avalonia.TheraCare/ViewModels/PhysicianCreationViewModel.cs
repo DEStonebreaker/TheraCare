@@ -21,6 +21,7 @@ public partial class PhysicianCreationViewModel : ViewModelBase
     [ObservableProperty] private string? _gradDate;
     [ObservableProperty] private string? _specialization;
     [ObservableProperty] private string? _updated;
+    [ObservableProperty] private string? _title = "Physician Creation";
     private bool updateMode = false;
 
     public PhysicianCreationViewModel()
@@ -36,6 +37,7 @@ public partial class PhysicianCreationViewModel : ViewModelBase
         GradDate = physician.GraduationDate;
         Specialization = physician.Specializations;
         updateMode = true;
+        Title = "Update Physician";
     }
 
     [RelayCommand]
@@ -45,17 +47,15 @@ public partial class PhysicianCreationViewModel : ViewModelBase
         {
             var Phys = PhysicianFactory.FromArgs(FirstName, LastName, LicenseNumber, GradDate, Specialization);
             PhysicianProxy.Current.CreatePhysician(Phys);
-            FirstName = string.Empty;
-            LastName = string.Empty;
-            LicenseNumber = string.Empty;
-            GradDate = string.Empty;
-            Specialization = string.Empty;
+            ClearFields();
         }
         else
         {
             var Phys = PhysicianFactory.FromArgsUpdater(Id, FirstName, LastName, LicenseNumber, GradDate,
                 Specialization);
             PhysicianProxy.Current.UpdatePhysician(Phys);
+            Title = "Successfully Updated Physician";
+            ClearFields();
         }
     }
 
@@ -66,14 +66,19 @@ public partial class PhysicianCreationViewModel : ViewModelBase
         {
             updateMode = false;
             WeakReferenceMessenger.Default.Send(new ViewChangeMessage(new PhysicianManagementViewModel()));
-            FirstName = string.Empty;
-            LastName = string.Empty;
-            LicenseNumber = string.Empty;
-            GradDate = string.Empty;
-            Specialization = string.Empty;
+            ClearFields();
             return;
         }
 
         WeakReferenceMessenger.Default.Send(new ViewChangeMessage(new PhysicianViewModel()));
+    }
+
+    private void ClearFields()
+    {
+        FirstName = string.Empty;
+        LastName = string.Empty;
+        LicenseNumber = string.Empty;
+        GradDate = string.Empty;
+        Specialization = string.Empty;
     }
 }

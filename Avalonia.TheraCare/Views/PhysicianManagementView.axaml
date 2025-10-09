@@ -10,10 +10,10 @@
     <Border>
         <Grid ColumnDefinitions="Auto, *, Auto"
               Background="WhiteSmoke"
-              ShowGridLines="True">
+              ShowGridLines="False">
             <Grid Column="1"
                   Width="800"
-                  ShowGridLines="True"
+                  ShowGridLines="False"
                   ColumnDefinitions="Auto, *, Auto"
                   HorizontalAlignment="Center">
                 <StackPanel Grid.Column="1"
@@ -23,7 +23,7 @@
                             VerticalAlignment="Center"
                             Spacing="10">
                     <TextBlock Foreground="Black"
-                               Text="Patient Management"
+                               Text="Physician Management"
                                HorizontalAlignment="Center" />
                     <Border HorizontalAlignment="Center"
                             Height="400">
