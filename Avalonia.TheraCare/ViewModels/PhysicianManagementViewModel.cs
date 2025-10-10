@@ -1,16 +1,12 @@
-using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using Avalonia.TheraCare.Messages;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using Library.TheraCare.Models;
-using Library.TheraCare.Services.Factories;
 using Library.TheraCare.Services.Proxies;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Avalonia.TheraCare.ViewModels;
 
@@ -51,7 +47,7 @@ public partial class PhysicianManagementViewModel : ViewModelBase
         SelectedPhysician = null;
     }
     
-    public event PropertyChangedEventHandler? PropertyChanged;
+    public new event PropertyChangedEventHandler? PropertyChanged;
     private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

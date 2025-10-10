@@ -2,12 +2,11 @@ namespace Library.TheraCare.Models;
 
 public class Appointment
 {
-    public DateTime StartTime { get; set; }
-    public TimeSpan Duration { get; set; } = TimeSpan.FromMinutes(30);
-    public bool IsBooked { get; set; }
+    public DateTime? StartTime { get; init; } = null;
+    public bool IsBooked { get; init; } = false;
 
-    public Physician? Physician { get; set; }
+    public Physician? Physician { get; init; } = null;
+    public Patient? Patient { get; init; } = null;
 
-    // public Patient? Patient { get; set; }
     public string? Notes { get; set; }
 }
