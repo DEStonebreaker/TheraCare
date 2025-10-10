@@ -24,19 +24,19 @@
         <Border Grid.Column="0" Padding="10" Background="#782F40">
             <Grid RowDefinitions="24">
                 <TextBlock FontFamily="Times New Roman"
-                                   Foreground="White"
-                                   FontSize="24"
-                                   FontWeight="Bold"
-                                   Text="TheraCare Health"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center" />
+                           Foreground="White"
+                           FontSize="24"
+                           FontWeight="Bold"
+                           Text="TheraCare Health"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center" />
             </Grid>
         </Border>
 
         <Grid Grid.Row="1">
-            <ContentControl Content="{Binding CurrentViewModel}"/>
+            <ContentControl Content="{Binding CurrentViewModel}" />
         </Grid>
-        
+
     </Grid>
 
 </Window>
