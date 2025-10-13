@@ -80,4 +80,12 @@ public class AppointmentProxy
         }
     }
 
+    public void DisplayAll()
+    {
+        foreach (var appointment in _appointments)
+        {
+            Console.WriteLine(appointment);
+        }
+    }
+
 }

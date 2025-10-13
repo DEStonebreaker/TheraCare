@@ -5,6 +5,7 @@ using Avalonia.TheraCare.Messages;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using Library.TheraCare.Services.Factories;
 using Library.TheraCare.Models;
 using Library.TheraCare.Services.Proxies;
 
@@ -16,6 +17,10 @@ public partial class AppointmentCreationViewModel : ViewModelBase
     [ObservableProperty] private string? _patientSearch;
     [ObservableProperty] private Physician? _selectedPhysician;
     [ObservableProperty] private Patient? _selectedPatient;
+    [ObservableProperty] private string? _notes;
+    [ObservableProperty] private DateTime? _date;
+    [ObservableProperty] private TimeSpan? _apptSpan;
+    [ObservableProperty] private Guid? _selectPatientId;
     
     [ObservableProperty] private ObservableCollection<Patient> _patients;
     [ObservableProperty] private ObservableCollection<Physician> _physicians;
@@ -27,10 +32,17 @@ public partial class AppointmentCreationViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    public void DebugSelected()
+    public void CreateAppointment()
     {
-        Console.WriteLine(SelectedPhysician.Id);
-        Console.WriteLine(SelectedPatient.Id);
+        DateTime? obj = Date + ApptSpan;
+        var appt = AppointmentFactory.ApptFromArgs(SelectedPhysician, SelectedPatient, obj, true, Notes);
+        AppointmentProxy.Current.Create(appt);
+    }
+
+    [RelayCommand]
+    public void DisplayEm()
+    {
+        AppointmentProxy.Current.DisplayAll();
     }
 
     [RelayCommand]

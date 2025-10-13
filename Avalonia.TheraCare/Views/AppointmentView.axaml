@@ -21,6 +21,7 @@
                             HorizontalContentAlignment="Center"
                             Command="{Binding GoToCreation}"/>
                     <Button Content="Appointment Management"
+                            Command="{Binding GoToManagement}"
                             HorizontalAlignment="Stretch"
                             HorizontalContentAlignment="Center"/>
                     <Button Content="Back"

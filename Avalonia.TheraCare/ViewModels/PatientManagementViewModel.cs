@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Avalonia.TheraCare.Messages;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -20,25 +21,31 @@ public partial class PatientManagementViewModel : ViewModelBase
     {
         Patients = PatientProxy.Current.GetPatients();
     }
-    
+
     [RelayCommand]
-    public void EditPatient()
+    public async Task AsyncEditPatient()
     {
-        if (SelectedPatient == null) return;
-        WeakReferenceMessenger.Default.Send(new ViewChangeMessage(new PatientCreationViewModel(SelectedPatient)));
-        NotifyPropertyChanged(nameof(Patients));
+        await Task.Run(() =>
+        {
+            if (SelectedPatient == null) return;
+            WeakReferenceMessenger.Default.Send(new ViewChangeMessage(new PatientCreationViewModel(SelectedPatient)));
+            NotifyPropertyChanged(nameof(Patients));
+        });
     }
 
     [RelayCommand]
-    public void DeletePatient()
+    public async Task AsyncDeletePatient()
     {
-        if (SelectedPatient == null) return;
+        await Task.Run(() =>
+        {
+            if (SelectedPatient == null) return;
 
-        PatientProxy.Current.DeletePatient(SelectedPatient.Id);
-        Patients.Remove(SelectedPatient);
-        SelectedPatient = null;
+            PatientProxy.Current.DeletePatient(SelectedPatient.Id);
+            Patients.Remove(SelectedPatient);
+            SelectedPatient = null;
+        });
     }
-    
+
     [RelayCommand]
     public void GoBack()
     {
@@ -49,4 +56,22 @@ public partial class PatientManagementViewModel : ViewModelBase
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
+    
+    // [RelayCommand]
+    // public void EditPatient()
+    // {
+    //     if (SelectedPatient == null) return;
+    //     WeakReferenceMessenger.Default.Send(new ViewChangeMessage(new PatientCreationViewModel(SelectedPatient)));
+    //     NotifyPropertyChanged(nameof(Patients));
+    // }
+    //
+    // [RelayCommand]
+    // public void DeletePatient()
+    // {
+    //     if (SelectedPatient == null) return;
+    //
+    //     PatientProxy.Current.DeletePatient(SelectedPatient.Id);
+    //     Patients.Remove(SelectedPatient);
+    //     SelectedPatient = null;
+    // }
 }

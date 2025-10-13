@@ -67,8 +67,7 @@
                                 HorizontalContentAlignment="Center"
                                 Width="80"
                                 Content="Submit"
-                                IsEnabled="{Binding canSubmit}"
-                                Command="{Binding Submit}"/>
+                                Command="{Binding AsyncSubmit}"/>
                     </Grid>
 
                 </StackPanel>

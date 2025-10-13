@@ -14,4 +14,12 @@ public class Appointment
     public Patient? Patient { get; init; } = null;
 
     public string? Notes { get; set; }
+
+    public override string ToString()
+    {
+        return $"Dr. {Physician.LastName}, {Physician.FirstName}\n" +
+               $"Patient: {Patient.LastName}, {Patient.FirstName}\n" +
+               $"Date: {StartTime:d}\n" +
+               $"Notes: {Notes}";
+    }
 }

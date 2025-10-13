@@ -1,0 +1,42 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
+             xmlns:vm="clr-namespace:Avalonia.TheraCare.ViewModels"
+             x:DataType="vm:AppointmentManagementViewModel"
+             x:Class="Avalonia.TheraCare.Views.AppointmentManagementView">
+
+    <Border>
+        <Grid ColumnDefinitions="Auto, *, Auto">
+            <StackPanel Grid.Column="1"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Width="800">
+
+                <TextBlock Text="Appointment Management"
+                           HorizontalAlignment="Center" />
+
+                <Border Background="PowderBlue"
+                        Width="750"
+                        Height="400">
+                    <DataGrid
+                        ItemsSource="{Binding Appointments}"
+                        Width="750"
+                        Height="400"
+                        AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Physician" Binding="{Binding Physician.LastName}"/>
+                            <DataGridTextColumn Header="Patient" Binding="{Binding Patient.LastName}"/>
+                            <DataGridTextColumn Header="Time" Binding="{Binding StartTime}"/>
+                            <DataGridTextColumn Header="Notes" Binding="{Binding Notes}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Border>
+
+
+            </StackPanel>
+        </Grid>
+    </Border>
+
+</UserControl>
