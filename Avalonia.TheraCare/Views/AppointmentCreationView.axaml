@@ -3,6 +3,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
+             xmlns:vm="clr-namespace:Avalonia.TheraCare.ViewModels"
+             x:DataType="vm:AppointmentCreationViewModel"
              x:Class="Avalonia.TheraCare.Views.AppointmentCreationView">
 
     <Border>
@@ -14,9 +16,33 @@
                   ColumnDefinitions="Auto, *, Auto"
                   HorizontalAlignment="Center">
                 <StackPanel Grid.Column="1"
-                            Width="200"
-                            HorizontalAlignment="Center">
-                    <Button Content="Hello"/>
+                            Width="750"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Spacing="5">
+                    <AutoCompleteBox Width="500"
+                                     Watermark="Physician Name"
+                                     ItemsSource="{Binding Physicians}"
+                                     SelectedItem="{Binding SelectedPhysician}"
+                                     FilterMode="ContainsOrdinal">
+                    </AutoCompleteBox>
+                    <AutoCompleteBox Width="500"
+                                     Watermark="Patient Name"
+                                     ItemsSource="{Binding Patients}"
+                                     SelectedItem="{Binding SelectedPatient}"
+                                     FilterMode="ContainsOrdinal">
+                    </AutoCompleteBox>
+                    <!-- LOOK INTO VALUE MEMBER BINDING -->
+                    <Button Content="Debug"
+                            Command="{Binding DebugSelected}"
+                            Width="300"
+                            HorizontalAlignment="Center"
+                            HorizontalContentAlignment="Center" />
+                    <Button Content="Back"
+                            Command="{Binding GoToHome}"
+                            Width="300"
+                            HorizontalAlignment="Center"
+                            HorizontalContentAlignment="Center" />
                 </StackPanel>
             </Grid>
         </Grid>

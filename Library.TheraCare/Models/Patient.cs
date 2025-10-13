@@ -2,6 +2,7 @@ namespace Library.TheraCare.Models;
 
 public class Patient
 {
+    
     public Guid Id { get; init; } = Guid.Empty;
     public string FirstName { get; init; } = string.Empty;
     public string LastName { get; init; } = string.Empty;
@@ -14,7 +15,7 @@ public class Patient
 
     public override string ToString()
     {
-        return $"{FirstName}, {LastName} | DOB: {BirthDate:MM.dd.yyyy}";
+        return $"{LastName}, {FirstName} | DOB: {BirthDate:MM.dd.yyyy}";
     }
 
     // public List<string> Diagnosis { get; init; } = new List<string>();

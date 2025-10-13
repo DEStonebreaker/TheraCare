@@ -18,7 +18,8 @@
                             Spacing="5">
                     <Button Content="Create Appointment"
                             HorizontalAlignment="Stretch"
-                            HorizontalContentAlignment="Center"/>
+                            HorizontalContentAlignment="Center"
+                            Command="{Binding GoToCreation}"/>
                     <Button Content="Appointment Management"
                             HorizontalAlignment="Stretch"
                             HorizontalContentAlignment="Center"/>

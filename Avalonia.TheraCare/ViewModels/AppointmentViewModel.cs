@@ -7,6 +7,11 @@ namespace Avalonia.TheraCare.ViewModels;
 public partial class AppointmentViewModel : ViewModelBase
 {
     
+    [RelayCommand]
+    public void GoToCreation()
+    {
+        WeakReferenceMessenger.Default.Send(new ViewChangeMessage(new AppointmentCreationViewModel()));
+    }
     
     [RelayCommand]
     public void GoToHome()

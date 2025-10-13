@@ -1,0 +1,83 @@
+using System.Collections.ObjectModel;
+using Library.TheraCare.Models;
+
+namespace Library.TheraCare.Services.Proxies;
+
+public class AppointmentProxy
+{
+    private static AppointmentProxy? _instance;
+    private static readonly object _lock = new object();
+    private readonly List<Appointment> _appointments = new List<Appointment>();
+
+    public AppointmentProxy()
+    {
+    }
+
+    public static AppointmentProxy Current
+    {
+        get
+        {
+            lock (_lock)
+            {
+                _instance ??= new AppointmentProxy();
+            }
+
+            return _instance;
+        }
+    }
+    
+    public void Create(Appointment appointment)
+    {
+        lock (_lock)
+        {
+            _appointments.Add(appointment);
+        }
+    }
+
+    public void Update(Appointment appointment)
+    {
+        lock (_lock)
+        {
+            if (_appointments.Find(x => x.Id == appointment.Id) == null)
+            {
+                return;
+            }
+
+            int idx = _appointments.FindIndex(x => x.Id == appointment.Id);
+            if (idx != -1)
+            {
+                _appointments[idx] = appointment;
+            }  
+        }
+        
+    }
+
+    public void Delete(Guid id)
+    {
+        lock (_lock)
+        {
+            int index = _appointments.FindIndex(p => p.Id == id);
+            if (index != -1)
+            {
+                _appointments.RemoveAt(index);
+            }
+        }
+    }
+
+    public Appointment? GetById(Guid id)
+    {
+        lock (_lock)
+        {
+            return _appointments.FirstOrDefault(x => x.Id == id);
+        }
+    }
+
+    public ObservableCollection<Appointment> GetAppointments()
+    {
+        lock (_lock)
+        {
+            return new ObservableCollection<Appointment>(_appointments);
+        }
+    }
+
+}
