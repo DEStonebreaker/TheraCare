@@ -20,6 +20,8 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Spacing="5">
+                    <TextBlock HorizontalAlignment="Center"
+                               Text="{Binding Title}"/>
                     <AutoCompleteBox Width="500"
                                      Watermark="Physician Name"
                                      ItemsSource="{Binding Physicians}"
@@ -52,6 +54,7 @@
                     <Button Content="Submit"
                             Command="{Binding CreateAppointment}"
                             Width="300"
+                            IsEnabled="{Binding IsActive}"
                             HorizontalAlignment="Center"
                             HorizontalContentAlignment="Center"/>
                     

@@ -26,11 +26,18 @@ public class AppointmentProxy
         }
     }
     
-    public void Create(Appointment appointment)
+    public bool Create(Appointment appointment)
     {
         lock (_lock)
         {
+            var test = _appointments.FirstOrDefault(appt => appt.StartTime == appointment.StartTime);
+            if (test != null)
+            {
+                return false;
+            }
+
             _appointments.Add(appointment);
+            return true;
         }
     }
 

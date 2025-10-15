@@ -12,29 +12,41 @@
             <StackPanel Grid.Column="1"
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
-                        Width="800">
+                        Width="800"
+                        Spacing="5">
 
                 <TextBlock Text="Appointment Management"
-                           HorizontalAlignment="Center" />
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,8" />
 
-                <Border Background="PowderBlue"
-                        Width="750"
+                <Border Background="LightGray"
+                        Width="800"
                         Height="400">
                     <DataGrid
                         ItemsSource="{Binding Appointments}"
-                        Width="750"
+                        Width="800"
                         Height="400"
-                        AutoGenerateColumns="False">
+                        AutoGenerateColumns="False"
+                        IsReadOnly="True"
+                        BorderBrush="Gray">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Physician" Binding="{Binding Physician.LastName}"/>
-                            <DataGridTextColumn Header="Patient" Binding="{Binding Patient.LastName}"/>
-                            <DataGridTextColumn Header="Time" Binding="{Binding StartTime}"/>
-                            <DataGridTextColumn Header="Notes" Binding="{Binding Notes}"/>
+                            <DataGridTextColumn Header="Physician"
+                                                Binding="{Binding Physician.LastName}"
+                                                Width="200" />
+                            <DataGridTextColumn Header="Patient"
+                                                Binding="{Binding Patient.LastName}"
+                                                Width="200" />
+                            <DataGridTextColumn Header="Time"
+                                                Binding="{Binding StartTime}"
+                                                Width="200" />
+                            <DataGridTextColumn Header="Notes"
+                                                Binding="{Binding Notes}"
+                                                Width="200" />
                         </DataGrid.Columns>
                     </DataGrid>
                 </Border>
-
-
+                <Button Content="Go Back"
+                        Command="{Binding GoBack}" />
             </StackPanel>
         </Grid>
     </Border>
