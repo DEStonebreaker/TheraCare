@@ -7,20 +7,30 @@
              x:DataType="vm:AppointmentViewModel"
              x:Class="Avalonia.TheraCare.Views.AppointmentView">
     
-    <Border Background="WhiteSmoke">
-        <StackPanel HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Spacing="5">
-                    <TextBlock HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
-                               Foreground="Black"
-                               Text="Under Construction"/>
-            <Button Content="Back"
-                    Command="{Binding GoToHome}"
-                    HorizontalAlignment="Center"
-                    HorizontalContentAlignment="Center"/>
-        </StackPanel>
-
+    <Border>
+        <Grid ColumnDefinitions="*, Auto, *"
+              Background="WhiteSmoke">
+            <Grid Grid.Column="1"
+                  Width="880">
+                <StackPanel HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Width="250"
+                            Spacing="5">
+                    <Button Content="Create Appointment"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Center"
+                            Command="{Binding GoToCreation}"/>
+                    <Button Content="Appointment Management"
+                            Command="{Binding GoToManagement}"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Center"/>
+                    <Button Content="Back"
+                            Command="{Binding GoToHome}"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Center"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
     </Border>
     
 </UserControl>

@@ -8,7 +8,7 @@ namespace Avalonia.TheraCare.ViewModels;
 
 public partial class HomeViewModel : ViewModelBase
 {
-
+    
     [RelayCommand]
     public void GoToPatient()
     {

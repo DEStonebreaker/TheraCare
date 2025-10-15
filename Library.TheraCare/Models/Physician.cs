@@ -11,6 +11,6 @@ public class Physician
     
     public override string ToString()
     {
-        return $"Dr. {FirstName} {LastName} - {Specializations} (License: {LicenseNumber}) | Grad: {GraduationDate:MM.dd.yyyy}";
+        return $"Dr. {LastName}, {FirstName} - {Specializations} (License: {LicenseNumber}) | Grad: {GraduationDate:MM.dd.yyyy}";
     }
 }

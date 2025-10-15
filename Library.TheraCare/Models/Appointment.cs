@@ -2,12 +2,24 @@ namespace Library.TheraCare.Models;
 
 public class Appointment
 {
-    public DateTime StartTime { get; set; }
-    public TimeSpan Duration { get; set; } = TimeSpan.FromMinutes(30);
-    public bool IsBooked { get; set; }
+    /**
+     * Setup so that a physician holds a list of appointments
+     */
+    public Guid Id { get; init; } = Guid.Empty;
+    public DateTime? StartTime { get; init; } = null;
+    public TimeSpan? Duration { get; init; } = TimeSpan.FromMinutes(30);
+    public bool IsBooked { get; init; } = false;
 
-    public Physician? Physician { get; set; }
+    public Physician? Physician { get; init; } = null;
+    public Patient? Patient { get; init; } = null;
 
-    // public Patient? Patient { get; set; }
     public string? Notes { get; set; }
+
+    public override string ToString()
+    {
+        return $"Dr. {Physician.LastName}, {Physician.FirstName}\n" +
+               $"Patient: {Patient.LastName}, {Patient.FirstName}\n" +
+               $"Date: {StartTime:d}\n" +
+               $"Notes: {Notes}";
+    }
 }

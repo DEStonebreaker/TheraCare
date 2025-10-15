@@ -1,0 +1,77 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
+             xmlns:vm="clr-namespace:Avalonia.TheraCare.ViewModels"
+             x:DataType="vm:AppointmentCreationViewModel"
+             x:Class="Avalonia.TheraCare.Views.AppointmentCreationView">
+
+    <Border>
+        <Grid ColumnDefinitions="Auto, *, Auto"
+              Background="WhiteSmoke">
+            <Grid Grid.Column="1"
+                  Width="800"
+                  ShowGridLines="False"
+                  ColumnDefinitions="Auto, *, Auto"
+                  HorizontalAlignment="Center">
+                <StackPanel Grid.Column="1"
+                            Width="750"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Spacing="5">
+                    <TextBlock HorizontalAlignment="Center"
+                               Text="{Binding Title}"/>
+                    <AutoCompleteBox Width="500"
+                                     Watermark="Physician Name"
+                                     ItemsSource="{Binding Physicians}"
+                                     SelectedItem="{Binding SelectedPhysician}"
+                                     FilterMode="ContainsOrdinal">
+                    </AutoCompleteBox>
+                    <AutoCompleteBox Width="500"
+                                     Watermark="Patient Name"
+                                     ItemsSource="{Binding Patients}"
+                                     SelectedItem="{Binding SelectedPatient}"
+                                     FilterMode="ContainsOrdinal">
+                    </AutoCompleteBox>
+                    
+                    <CalendarDatePicker HorizontalAlignment="Center"
+                                        Width="500"
+                                        SelectedDate="{Binding Date}"/>
+
+                    <TimePicker ClockIdentifier="12HourClock"
+                                MinuteIncrement="30"
+                                HorizontalAlignment="Center"
+                                SelectedTime="{Binding ApptSpan}"/>
+                    
+                    <TextBox HorizontalAlignment="Center"
+                             Width="500"
+                             Height="60"
+                             TextWrapping="Wrap"
+                             Watermark="Notes"
+                             Text="{Binding Notes}"/>
+                    
+                    <Button Content="Submit"
+                            Command="{Binding CreateAppointment}"
+                            Width="300"
+                            IsEnabled="{Binding IsActive}"
+                            HorizontalAlignment="Center"
+                            HorizontalContentAlignment="Center"/>
+                    
+                    <Button Content="Debug"
+                            Width="300"
+                            Command="{Binding DisplayEm}"
+                            HorizontalAlignment="Center"
+                            HorizontalContentAlignment="Center" />
+                    
+                    <Button Content="Back"
+                            Command="{Binding GoToHome}"
+                            Width="300"
+                            HorizontalAlignment="Center"
+                            HorizontalContentAlignment="Center" />
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Border>
+
+</UserControl>

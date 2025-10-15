@@ -44,11 +44,11 @@
                                 HorizontalAlignment="Right" />
                         <Button Grid.Column="3"
                                 Content="Edit"
-                                Command="{Binding EditPhysician}"
+                                Command="{Binding AsyncEditPhysician}"
                                 HorizontalAlignment="Right" />
                         <Button Grid.Column="4"
                                 Content="Delete"
-                                Command="{Binding DeletePhysician}"
+                                Command="{Binding AsyncDeletePhysician}"
                                 HorizontalAlignment="Right" />
                     </Grid>
 
