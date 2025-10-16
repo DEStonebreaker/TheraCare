@@ -1,7 +1,5 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUI.TheraCare", "GUI.TheraCare\GUI.TheraCare.csproj", "{B45E5485-69C3-414E-9FF6-671E4B384202}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.TheraCare", "Library.TheraCare\Library.TheraCare.csproj", "{0485007C-E1FE-4C6A-AA41-8A66A641FAC3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avalonia.TheraCare", "Avalonia.TheraCare\Avalonia.TheraCare.csproj", "{15171B35-05CE-4CBF-B6EF-3B7791446BB0}"
@@ -12,10 +10,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B45E5485-69C3-414E-9FF6-671E4B384202}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B45E5485-69C3-414E-9FF6-671E4B384202}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B45E5485-69C3-414E-9FF6-671E4B384202}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B45E5485-69C3-414E-9FF6-671E4B384202}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0485007C-E1FE-4C6A-AA41-8A66A641FAC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0485007C-E1FE-4C6A-AA41-8A66A641FAC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0485007C-E1FE-4C6A-AA41-8A66A641FAC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
