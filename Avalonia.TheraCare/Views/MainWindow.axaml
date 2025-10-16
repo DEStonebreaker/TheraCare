@@ -8,7 +8,6 @@
         Height="720"
         x:Class="Avalonia.TheraCare.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
-        xmlns:views="clr-namespace:Avalonia.TheraCare.Views"
         Icon="/Assets/avalonia-logo.ico"
         Title="COP4870 Fall 2025">
 

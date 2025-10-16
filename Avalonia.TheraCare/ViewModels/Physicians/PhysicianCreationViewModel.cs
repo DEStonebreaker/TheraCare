@@ -1,8 +1,5 @@
 using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using Avalonia.Platform;
 using Avalonia.TheraCare.Messages;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -11,10 +8,11 @@ using Library.TheraCare.Models;
 using Library.TheraCare.Services.Factories;
 using Library.TheraCare.Services.Proxies;
 
-namespace Avalonia.TheraCare.ViewModels;
+namespace Avalonia.TheraCare.ViewModels.Physicians;
 
 public partial class PhysicianCreationViewModel : ViewModelBase
 {
+    // Input Capture Properties
     [ObservableProperty] private Guid _id;
     [ObservableProperty] private string? _firstName;
     [ObservableProperty] private string? _lastName;
@@ -23,9 +21,10 @@ public partial class PhysicianCreationViewModel : ViewModelBase
     [ObservableProperty] private string? _specialization;
     [ObservableProperty] private string? _updated;
     [ObservableProperty] private string? _title = "Physician Creation";
-    private bool canSubmit { get; set; } = true;
-    private bool updateMode = false;
+    private bool CanSubmit { get; set; } = true;
+    private bool _updateMode;
 
+    // CTORS. Default and Physician Edits.
     public PhysicianCreationViewModel()
     {
     }
@@ -38,7 +37,7 @@ public partial class PhysicianCreationViewModel : ViewModelBase
         LicenseNumber = physician.LicenseNumber;
         GradDate = physician.GraduationDate;
         Specialization = physician.Specializations;
-        updateMode = true;
+        _updateMode = true;
         Title = "Update Physician";
     }
 
@@ -48,20 +47,20 @@ public partial class PhysicianCreationViewModel : ViewModelBase
     {
         await Task.Run(() =>
         {
-            if (updateMode == false)
+            if (_updateMode == false)
             {
-                var Phys = PhysicianFactory.FromArgs(FirstName, LastName, LicenseNumber, GradDate, Specialization);
-                PhysicianProxy.Current.CreatePhysician(Phys);
+                var phys = PhysicianFactory.FromArgs(FirstName, LastName, LicenseNumber, GradDate, Specialization);
+                PhysicianProxy.Current.CreatePhysician(phys);
                 ClearFields();
             }
             else
             {
-                var Phys = PhysicianFactory.FromArgsUpdater(Id, FirstName, LastName, LicenseNumber, GradDate,
+                var phys = PhysicianFactory.FromArgsUpdater(Id, FirstName, LastName, LicenseNumber, GradDate,
                     Specialization);
-                PhysicianProxy.Current.UpdatePhysician(Phys);
+                PhysicianProxy.Current.UpdatePhysician(phys);
                 Title = "Successfully Updated Physician";
                 ClearFields();
-                canSubmit = false;
+                CanSubmit = false;
             }
         });
     }
@@ -69,9 +68,9 @@ public partial class PhysicianCreationViewModel : ViewModelBase
     [RelayCommand]
     public void GoBack()
     {
-        if (updateMode == true)
+        if (_updateMode)
         {
-            updateMode = false;
+            _updateMode = false;
             WeakReferenceMessenger.Default.Send(new ViewChangeMessage(new PhysicianManagementViewModel()));
             ClearFields();
             return;
@@ -79,6 +78,8 @@ public partial class PhysicianCreationViewModel : ViewModelBase
 
         WeakReferenceMessenger.Default.Send(new ViewChangeMessage(new PhysicianViewModel()));
     }
+
+    // Helper Functions
 
     private void ClearFields()
     {
@@ -88,23 +89,4 @@ public partial class PhysicianCreationViewModel : ViewModelBase
         GradDate = null;
         Specialization = string.Empty;
     }
-    // [RelayCommand]
-    // public void Submit()
-    // {
-    //     if (updateMode == false)
-    //     {
-    //         var Phys = PhysicianFactory.FromArgs(FirstName, LastName, LicenseNumber, GradDate, Specialization);
-    //         PhysicianProxy.Current.CreatePhysician(Phys);
-    //         ClearFields();
-    //     }
-    //     else
-    //     {
-    //         var Phys = PhysicianFactory.FromArgsUpdater(Id, FirstName, LastName, LicenseNumber, GradDate,
-    //             Specialization);
-    //         PhysicianProxy.Current.UpdatePhysician(Phys);
-    //         Title = "Successfully Updated Physician";
-    //         ClearFields();
-    //         canSubmit = false;
-    //     }
-    // }
 }

@@ -3,10 +3,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             xmlns:vm="clr-namespace:Avalonia.TheraCare.ViewModels"
-             x:DataType="vm:PhysicianManagementViewModel"
-             x:Class="Avalonia.TheraCare.Views.PhysicianManagementView">
-    
+             xmlns:physicians="clr-namespace:Avalonia.TheraCare.ViewModels.Physicians"
+             x:DataType="physicians:PhysicianManagementViewModel"
+             x:Class="Avalonia.TheraCare.Views.Physicians.PhysicianManagementView">
+
     <Border>
         <Grid ColumnDefinitions="Auto, *, Auto"
               Background="WhiteSmoke"
@@ -29,7 +29,7 @@
                             Height="400">
                         <ListBox Width="750"
                                  ItemsSource="{Binding Physicians}"
-                                 SelectedItem="{Binding SelectedPhysician}"/>
+                                 SelectedItem="{Binding SelectedPhysician}" />
                     </Border>
 
                     <Grid ColumnDefinitions="Auto, *, Auto, Auto, Auto"
@@ -39,12 +39,12 @@
                                 Command="{Binding GoBack}"
                                 HorizontalAlignment="Left" />
                         <TextBox Grid.Column="2"
-                                Watermark="Search by name"
-                                Width="200"
-                                HorizontalAlignment="Right" />
+                                 Watermark="Search by name"
+                                 Width="200"
+                                 HorizontalAlignment="Right" />
                         <Button Grid.Column="3"
                                 Content="Edit"
-                                Command="{Binding AsyncEditPhysician}"
+                                Command="{Binding EditPhysician}"
                                 HorizontalAlignment="Right" />
                         <Button Grid.Column="4"
                                 Content="Delete"
@@ -56,5 +56,5 @@
             </Grid>
         </Grid>
     </Border>
-    
+
 </UserControl>

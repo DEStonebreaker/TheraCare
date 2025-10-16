@@ -3,9 +3,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
-             xmlns:vm="clr-namespace:Avalonia.TheraCare.ViewModels"
-             x:DataType="vm:AppointmentManagementViewModel"
-             x:Class="Avalonia.TheraCare.Views.AppointmentManagementView">
+             xmlns:appointments="clr-namespace:Avalonia.TheraCare.ViewModels.Appointments"
+             x:DataType="appointments:AppointmentManagementViewModel"
+             x:Class="Avalonia.TheraCare.Views.Appointments.AppointmentManagementView">
 
     <Border>
         <Grid ColumnDefinitions="Auto, *, Auto">

@@ -2,11 +2,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:vm="clr-namespace:Avalonia.TheraCare.ViewModels"
-             x:DataType="vm:PhysicianCreationViewModel"
+             xmlns:physicians="clr-namespace:Avalonia.TheraCare.ViewModels.Physicians"
+             x:DataType="physicians:PhysicianCreationViewModel"
              mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
-             x:Class="Avalonia.TheraCare.Views.PhysicianCreationView">
-    
+             x:Class="Avalonia.TheraCare.Views.Physicians.PhysicianCreationView">
+
     <Border>
         <Grid ColumnDefinitions="Auto, *, Auto"
               Background="WhiteSmoke">
@@ -25,54 +25,54 @@
                     <TextBox
                         Width="250"
                         Height="24"
-                        Watermark="First Name" 
-                        Text="{Binding FirstName}"/>
+                        Watermark="First Name"
+                        Text="{Binding FirstName}" />
                     <TextBox
                         Width="250"
                         Height="24"
-                        Watermark="Last Name" 
-                        Text = "{Binding LastName}"/>
+                        Watermark="Last Name"
+                        Text="{Binding LastName}" />
                     <TextBox
                         Width="250"
                         Height="24"
-                        Watermark="License Number" 
-                        Text = "{Binding LicenseNumber}"/>
+                        Watermark="License Number"
+                        Text="{Binding LicenseNumber}" />
                     <Grid ColumnDefinitions="*, Auto">
                         <TextBlock Grid.Column="0"
                                    Text="Graduation Date:"
-                                   VerticalAlignment="Center"/>
+                                   VerticalAlignment="Center" />
                         <CalendarDatePicker Grid.Column="1"
-                                               HorizontalAlignment="Right"
-                                               SelectedDateFormat="Short"
-                                               Width="120"
-                                               SelectedDate="{Binding GradDate}"
-                                               Margin="0,0,0,0"/> 
+                                            HorizontalAlignment="Right"
+                                            SelectedDateFormat="Short"
+                                            Width="120"
+                                            SelectedDate="{Binding GradDate}"
+                                            Margin="0,0,0,0" />
                     </Grid>
                     <TextBox
                         Width="250"
                         Height="50"
                         Watermark="Specializations"
                         TextWrapping="Wrap"
-                        AcceptsReturn="True" 
-                        Text="{Binding Specialization}"/>
+                        AcceptsReturn="True"
+                        Text="{Binding Specialization}" />
                     <Grid ColumnDefinitions="Auto, *, Auto">
                         <Button Grid.Column="0"
                                 HorizontalAlignment="Left"
                                 HorizontalContentAlignment="Center"
                                 Width="60"
-                                Content="Back" 
-                                Command="{Binding GoBack}"/>
+                                Content="Back"
+                                Command="{Binding GoBack}" />
                         <Button Grid.Column="2"
                                 HorizontalAlignment="Right"
                                 HorizontalContentAlignment="Center"
                                 Width="80"
                                 Content="Submit"
-                                Command="{Binding AsyncSubmit}"/>
+                                Command="{Binding AsyncSubmit}" />
                     </Grid>
 
                 </StackPanel>
             </Grid>
         </Grid>
     </Border>
-    
+
 </UserControl>

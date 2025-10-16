@@ -1,8 +1,6 @@
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
 
-namespace Avalonia.TheraCare.Views;
+namespace Avalonia.TheraCare.Views.Appointments;
 
 public partial class AppointmentView : UserControl
 {

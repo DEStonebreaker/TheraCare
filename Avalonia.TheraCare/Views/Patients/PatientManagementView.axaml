@@ -3,9 +3,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
-             xmlns:vm="clr-namespace:Avalonia.TheraCare.ViewModels"
-             x:DataType="vm:PatientManagementViewModel"
-             x:Class="Avalonia.TheraCare.Views.PatientManagementView">
+             xmlns:patients="clr-namespace:Avalonia.TheraCare.ViewModels.Patients"
+             x:DataType="patients:PatientManagementViewModel"
+             x:Class="Avalonia.TheraCare.Views.Patients.PatientManagementView">
 
     <Border>
         <Grid ColumnDefinitions="Auto, *, Auto"
@@ -28,8 +28,8 @@
                     <Border HorizontalAlignment="Center"
                             Height="400">
                         <ListBox Width="750"
-                                 ItemsSource="{Binding Patients}" 
-                                 SelectedItem="{Binding SelectedPatient}"/>
+                                 ItemsSource="{Binding Patients}"
+                                 SelectedItem="{Binding SelectedPatient}" />
                     </Border>
 
                     <Grid ColumnDefinitions="Auto, *, Auto, Auto, Auto"
@@ -39,12 +39,12 @@
                                 Command="{Binding GoBack}"
                                 HorizontalAlignment="Left" />
                         <TextBox Grid.Column="2"
-                                Watermark="Search by name"
-                                Width="200"
-                                HorizontalAlignment="Right" />
+                                 Watermark="Search by name"
+                                 Width="200"
+                                 HorizontalAlignment="Right" />
                         <Button Grid.Column="3"
                                 Content="Edit"
-                                Command="{Binding AsyncEditPatient}"
+                                Command="{Binding EditPatient}"
                                 HorizontalAlignment="Right" />
                         <Button Grid.Column="4"
                                 Content="Delete"

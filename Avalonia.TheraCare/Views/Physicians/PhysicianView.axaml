@@ -3,9 +3,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             xmlns:vm="clr-namespace:Avalonia.TheraCare.ViewModels"
-             x:DataType="vm:PhysicianViewModel"
-             x:Class="Avalonia.TheraCare.Views.PhysicianView">
+             xmlns:physicians="clr-namespace:Avalonia.TheraCare.ViewModels.Physicians"
+             x:DataType="physicians:PhysicianViewModel"
+             x:Class="Avalonia.TheraCare.Views.Physicians.PhysicianView">
 
     <Border Background="WhiteSmoke">
         <StackPanel Width="250"

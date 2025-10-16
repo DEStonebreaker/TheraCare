@@ -9,17 +9,22 @@ using CommunityToolkit.Mvvm.Messaging;
 using Library.TheraCare.Models;
 using Library.TheraCare.Services.Proxies;
 
-namespace Avalonia.TheraCare.ViewModels;
+namespace Avalonia.TheraCare.ViewModels.Physicians;
 
 public partial class PhysicianManagementViewModel : ViewModelBase
 {
-    [ObservableProperty] private ObservableCollection<Physician> _physicians;
+    // Input Capture Properties
     [ObservableProperty] private Physician? _selectedPhysician;
+    [ObservableProperty] private ObservableCollection<Physician> _physicians;
+
+    // CTORS. DEFAULT.
 
     public PhysicianManagementViewModel()
     {
         Physicians = PhysicianProxy.Current.GetPhysicians();
     }
+
+    // Buttons and Event Handling
 
     [RelayCommand]
     public void GoBack()
@@ -29,17 +34,13 @@ public partial class PhysicianManagementViewModel : ViewModelBase
 
 
     [RelayCommand]
-    public async Task AsyncEditPhysician()
+    public void EditPhysician()
     {
-        await Task.Run(() =>
-        {
-            if (SelectedPhysician == null) return;
-            WeakReferenceMessenger.Default.Send(
-                new ViewChangeMessage(new PhysicianCreationViewModel(SelectedPhysician)));
-            NotifyPropertyChanged(nameof(Physicians));
-        });
+        if (SelectedPhysician == null) return;
+        WeakReferenceMessenger.Default.Send(
+            new ViewChangeMessage(new PhysicianCreationViewModel(SelectedPhysician)));
     }
-    
+
     [RelayCommand]
     public async Task AsyncDeletePhysician()
     {
@@ -52,28 +53,4 @@ public partial class PhysicianManagementViewModel : ViewModelBase
             SelectedPhysician = null;
         });
     }
-
-    public new event PropertyChangedEventHandler? PropertyChanged;
-    private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-    {
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-
-
-    // [RelayCommand]
-    // public void EditPhysician()
-    // {
-    //     if (SelectedPhysician == null) return;
-    //     WeakReferenceMessenger.Default.Send(new ViewChangeMessage(new PhysicianCreationViewModel(SelectedPhysician)));
-    //     NotifyPropertyChanged(nameof(Physicians));
-    // }
-    // [RelayCommand]
-    // public void DeletePhysician()
-    // {
-    //     if (SelectedPhysician == null) return;
-    //
-    //     PhysicianProxy.Current.DeletePhysician(SelectedPhysician.Id);
-    //     Physicians.Remove(SelectedPhysician);
-    //     SelectedPhysician = null;
-    // }
 }

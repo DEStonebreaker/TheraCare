@@ -3,9 +3,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
-             xmlns:vm="clr-namespace:Avalonia.TheraCare.ViewModels"
-             x:DataType="vm:PatientCreationViewModel"
-             x:Class="Avalonia.TheraCare.Views.PatientCreationView">
+             xmlns:patients="clr-namespace:Avalonia.TheraCare.ViewModels.Patients"
+             x:DataType="patients:PatientCreationViewModel"
+             x:Class="Avalonia.TheraCare.Views.Patients.PatientCreationView">
 
     <Border>
         <Grid ColumnDefinitions="Auto, *, Auto"
@@ -26,17 +26,17 @@
                         Width="250"
                         Height="24"
                         Watermark="First Name"
-                        Text="{Binding FirstName}"/>
+                        Text="{Binding FirstName}" />
                     <TextBox
                         Width="250"
                         Height="24"
                         Watermark="Last Name"
-                        Text="{Binding LastName}"/>
+                        Text="{Binding LastName}" />
                     <TextBox
                         Width="250"
                         Height="24"
-                        Watermark="Address" 
-                        Text = "{Binding Address}"/>
+                        Watermark="Address"
+                        Text="{Binding Address}" />
                     <Grid ColumnDefinitions="*, Auto">
                         <TextBlock Grid.Column="0"
                                    Text="Date of Birth:     "
@@ -47,7 +47,7 @@
                                             HorizontalAlignment="Right"
                                             SelectedDateFormat="Short"
                                             Margin="0,0,0,0"
-                                            SelectedDate="{Binding BirthDate}"/>
+                                            SelectedDate="{Binding BirthDate}" />
                     </Grid>
                     <Grid ColumnDefinitions="Auto, *, Auto">
                         <!-- <ComboBox Grid.Column="0" -->
@@ -61,7 +61,7 @@
                                  Width="120"
                                  Height="24"
                                  Watermark="Race"
-                                 Text="{Binding Race}"/>
+                                 Text="{Binding Race}" />
                     </Grid>
 
                     <TextBox
@@ -70,14 +70,14 @@
                         Watermark="Medications"
                         TextWrapping="Wrap"
                         AcceptsReturn="True"
-                        Text="{Binding Medications}"/>
+                        Text="{Binding Medications}" />
                     <TextBox
                         Width="250"
                         Height="50"
                         Watermark="Diagnosis'"
                         TextWrapping="Wrap"
-                        AcceptsReturn="True" 
-                        Text="{Binding Diagnosis}"/>
+                        AcceptsReturn="True"
+                        Text="{Binding Diagnosis}" />
                     <Grid ColumnDefinitions="Auto, *, Auto">
                         <Button Grid.Column="0"
                                 HorizontalAlignment="Left"
@@ -89,8 +89,8 @@
                                 HorizontalAlignment="Right"
                                 HorizontalContentAlignment="Center"
                                 Width="80"
-                                Content="Submit" 
-                                Command="{Binding Submit}"/>
+                                Content="Submit"
+                                Command="{Binding Submit}" />
                     </Grid>
 
                 </StackPanel>

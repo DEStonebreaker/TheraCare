@@ -3,10 +3,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             xmlns:vm="clr-namespace:Avalonia.TheraCare.ViewModels"
-             x:DataType="vm:AppointmentViewModel"
-             x:Class="Avalonia.TheraCare.Views.AppointmentView">
-    
+             xmlns:appointments="clr-namespace:Avalonia.TheraCare.ViewModels.Appointments"
+             x:DataType="appointments:AppointmentViewModel"
+             x:Class="Avalonia.TheraCare.Views.Appointments.AppointmentView">
+
     <Border>
         <Grid ColumnDefinitions="*, Auto, *"
               Background="WhiteSmoke">
@@ -19,18 +19,18 @@
                     <Button Content="Create Appointment"
                             HorizontalAlignment="Stretch"
                             HorizontalContentAlignment="Center"
-                            Command="{Binding GoToCreation}"/>
+                            Command="{Binding GoToCreation}" />
                     <Button Content="Appointment Management"
                             Command="{Binding GoToManagement}"
                             HorizontalAlignment="Stretch"
-                            HorizontalContentAlignment="Center"/>
+                            HorizontalContentAlignment="Center" />
                     <Button Content="Back"
                             Command="{Binding GoToHome}"
                             HorizontalAlignment="Stretch"
-                            HorizontalContentAlignment="Center"/>
+                            HorizontalContentAlignment="Center" />
                 </StackPanel>
             </Grid>
         </Grid>
     </Border>
-    
+
 </UserControl>

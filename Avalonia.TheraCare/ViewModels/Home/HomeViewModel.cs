@@ -1,30 +1,28 @@
 using Avalonia.TheraCare.Messages;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
-using Library.TheraCare.Models;
-using Library.TheraCare.Services.Proxies;
 
-namespace Avalonia.TheraCare.ViewModels;
+namespace Avalonia.TheraCare.ViewModels.Home;
 
 public partial class HomeViewModel : ViewModelBase
 {
-    
+    // Buttons and Event Handling
     [RelayCommand]
     public void GoToPatient()
     {
-        WeakReferenceMessenger.Default.Send(new ViewChangeMessage(new PatientViewModel()));
+        WeakReferenceMessenger.Default.Send(new ViewChangeMessage(new Patients.PatientViewModel()));
     }
     
     [RelayCommand]
     public void GoToPhysician()
     {
-        WeakReferenceMessenger.Default.Send(new ViewChangeMessage(new PhysicianViewModel()));
+        WeakReferenceMessenger.Default.Send(new ViewChangeMessage(new Physicians.PhysicianViewModel()));
     }    
     
     [RelayCommand]
     public void GoToAdmin()
     {
-        WeakReferenceMessenger.Default.Send(new ViewChangeMessage(new AppointmentViewModel()));
+        WeakReferenceMessenger.Default.Send(new ViewChangeMessage(new Appointments.AppointmentViewModel()));
     }
     
 
