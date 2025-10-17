@@ -1,4 +1,6 @@
 ﻿using Avalonia.TheraCare.Messages;
+using Avalonia.TheraCare.ViewModels.Dialogues;
+using Avalonia.TheraCare.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 

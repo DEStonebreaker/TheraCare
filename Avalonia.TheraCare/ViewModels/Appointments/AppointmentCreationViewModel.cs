@@ -13,6 +13,7 @@ namespace Avalonia.TheraCare.ViewModels.Appointments;
 public partial class AppointmentCreationViewModel : ViewModelBase
 {
     // Input Capture Properties
+    [ObservableProperty] private Guid appointmentId;
     [ObservableProperty] private string? _physicianSearch;
     [ObservableProperty] private string? _patientSearch;
     [ObservableProperty] private Physician? _selectedPhysician;
@@ -20,7 +21,6 @@ public partial class AppointmentCreationViewModel : ViewModelBase
     [ObservableProperty] private string? _notes;
     [ObservableProperty] private DateTime? _date;
     [ObservableProperty] private TimeSpan? _apptSpan;
-    [ObservableProperty] private Guid? _selectPatientId;
     [ObservableProperty] private string? _title = "Appointment Creation";
 
     // Collections to be used in AutoCompleteBoxes
@@ -30,7 +30,9 @@ public partial class AppointmentCreationViewModel : ViewModelBase
     /**
      * Enables Submit, tracks date Validation for appointments
      */
-    [ObservableProperty] private bool _isActive = true;
+    [ObservableProperty] private bool _isActive = false;
+
+    [ObservableProperty] private bool _updateMode = false;
     [ObservableProperty] private DateTime? _startTime;
 
     /**
@@ -43,18 +45,44 @@ public partial class AppointmentCreationViewModel : ViewModelBase
         Physicians = PhysicianProxy.Current.GetPhysicians();
     }
 
+    public AppointmentCreationViewModel(Appointment appointment)
+    {
+        AppointmentId = appointment.Id;
+        Patients = PatientProxy.Current.GetPatients();
+        Physicians = PhysicianProxy.Current.GetPhysicians();
+        SelectedPatient = appointment.Patient;
+        SelectedPhysician = appointment.Physician;
+        Notes = appointment.Notes;
+        Date = appointment.StartTime.Value.Date;
+        ApptSpan = appointment.StartTime.Value.TimeOfDay;
+        UpdateMode = true;
+    }
+
     // Buttons and Event Handling
 
     /**
      * Bound to Submit Button.
      */
     [RelayCommand]
-    public void CreateAppointment()
+    public void Submit()
     {
         StartTime = Date + ApptSpan;
-        var appt = AppointmentFactory.ApptFromArgs(SelectedPhysician, SelectedPatient, StartTime, true, Notes);
-        if (!(AppointmentProxy.Current.Create(appt)))
-            Title = "Appointment Already Exists";
+        if (UpdateMode == false)
+        {
+            var appt = AppointmentFactory.ApptFromArgs(SelectedPhysician, SelectedPatient, StartTime, true, Notes);
+            if (!(AppointmentProxy.Current.Create(appt)))
+                Title = "Appointment Already Exists";
+            ClearFields();
+        }
+        else
+        {
+            var appt = AppointmentFactory.ApptUpdateArgs(AppointmentId, SelectedPhysician, SelectedPatient, StartTime,
+                true, Notes);
+            if (!(AppointmentProxy.Current.Update(appt)))
+                Title = "Appointment Already Exists";
+            Title = "Appointment Successfully Updated";
+            ClearFields();
+        }
     }
 
     /**
@@ -74,6 +102,17 @@ public partial class AppointmentCreationViewModel : ViewModelBase
     }
 
     // Observable(s) Handling. Each just updates on changed state.
+    partial void OnSelectedPhysicianChanged(Physician? value)
+    {
+        IsActive = IsValidTime();
+    }
+
+    partial void OnSelectedPatientChanged(Patient? value)
+    {
+        IsActive = IsValidTime();
+    }
+
+
     partial void OnDateChanged(DateTime? value)
     {
         IsActive = IsValidTime();
@@ -88,19 +127,55 @@ public partial class AppointmentCreationViewModel : ViewModelBase
      * Checks to see if the selected Date and Start time is valid given the selected
      * patient and physician.
      */
+
+    // Helper functions
     private bool IsValidTime()
     {
         StartTime = Date + ApptSpan;
+        if ((SelectedPatient == null) || (SelectedPhysician == null))
+            return false;
+
+        if (ApptSpan == null) return false;
+
+        TimeSpan dayStart = new TimeSpan(9, 0, 0);
+        TimeSpan dayEnd = new TimeSpan(17, 0, 0);
+        if (ApptSpan < dayStart || ApptSpan > dayEnd)
+        {
+            return false;
+        }
+
+        if (Date.HasValue && (Date.Value.DayOfWeek == DayOfWeek.Saturday
+                              || Date.Value.DayOfWeek == DayOfWeek.Sunday))
+        {
+            return false;
+        }
+
         foreach (var apptTime in AppointmentProxy.Current.GetAppointments())
         {
-            if ((apptTime.StartTime == StartTime)
-                && ((apptTime.Physician == SelectedPhysician))
-                || (apptTime.Patient == SelectedPatient))
+            if (UpdateMode && (apptTime.Id == AppointmentId))
+                continue;
+
+            if (((apptTime.Physician == SelectedPhysician)
+                 || (apptTime.Patient == SelectedPatient))
+                && (apptTime.StartTime == StartTime))
             {
                 return false;
             }
         }
 
         return true;
+    }
+
+    private void ClearFields()
+    {
+        // String.Empty on the Search properties leaves a character?
+        IsActive = false;
+        PhysicianSearch = "";
+        SelectedPhysician = null;
+        PatientSearch = "";
+        SelectedPatient = null;
+        Notes = String.Empty;
+        Date = null;
+        ApptSpan = null;
     }
 }

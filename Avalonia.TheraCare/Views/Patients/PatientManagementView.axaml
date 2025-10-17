@@ -38,10 +38,10 @@
                         <Button Grid.Column="0" Content="Go Back"
                                 Command="{Binding GoBack}"
                                 HorizontalAlignment="Left" />
-                        <TextBox Grid.Column="2"
-                                 Watermark="Search by name"
-                                 Width="200"
-                                 HorizontalAlignment="Right" />
+                        <!-- <TextBox Grid.Column="2" -->
+                        <!--          Watermark="Search by name" -->
+                        <!--          Width="200" -->
+                        <!--          HorizontalAlignment="Right" /> -->
                         <Button Grid.Column="3"
                                 Content="Edit"
                                 Command="{Binding EditPatient}"

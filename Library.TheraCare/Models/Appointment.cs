@@ -7,7 +7,8 @@ public class Appointment
      */
     public Guid Id { get; init; } = Guid.Empty;
     public DateTime? StartTime { get; init; } = null;
-    public TimeSpan? Duration { get; init; } = TimeSpan.FromMinutes(30);
+    public DateTime? TimeOfDay { get; init; } = null;
+    // public TimeSpan? Duration { get; init; } = TimeSpan.FromMinutes(30);
     public bool IsBooked { get; init; } = false;
 
     public Physician? Physician { get; init; } = null;
@@ -17,8 +18,8 @@ public class Appointment
 
     public override string ToString()
     {
-        return $"Dr. {Physician.LastName}, {Physician.FirstName}\n" +
-               $"Patient: {Patient.LastName}, {Patient.FirstName}\n" +
+        return $"Dr. {Physician?.LastName}, {Physician?.FirstName}\n" +
+               $"Patient: {Patient?.LastName}, {Patient?.FirstName}\n" +
                $"Date: {StartTime:d}\n" +
                $"Notes: {Notes}";
     }

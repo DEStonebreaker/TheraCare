@@ -22,31 +22,47 @@
                 <Border Background="LightGray"
                         Width="800"
                         Height="400">
-                    <DataGrid
-                        ItemsSource="{Binding Appointments}"
-                        Width="800"
-                        Height="400"
-                        AutoGenerateColumns="False"
-                        IsReadOnly="True"
-                        BorderBrush="Gray">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Physician"
-                                                Binding="{Binding Physician.LastName}"
-                                                Width="200" />
-                            <DataGridTextColumn Header="Patient"
-                                                Binding="{Binding Patient.LastName}"
-                                                Width="200" />
-                            <DataGridTextColumn Header="Time"
-                                                Binding="{Binding StartTime}"
-                                                Width="200" />
-                            <DataGridTextColumn Header="Notes"
-                                                Binding="{Binding Notes}"
-                                                Width="200" />
-                        </DataGrid.Columns>
-                    </DataGrid>
+                    <!-- <DataGrid -->
+                    <!--     ItemsSource="{Binding Appointments}" -->
+                    <!--     SelectedItem="{Binding SelectedAppointment}" -->
+                    <!--     Width="800" -->
+                    <!--     Height="400" -->
+                    <!--     AutoGenerateColumns="False" -->
+                    <!--     IsReadOnly="True" -->
+                    <!--     BorderBrush="Gray"> -->
+                    <!--     <DataGrid.Columns> -->
+                    <!--         <DataGridTextColumn Header="Physician" -->
+                    <!--                             Binding="{Binding Physician.LastName}" -->
+                    <!--                             Width="200" /> -->
+                    <!--         <DataGridTextColumn Header="Patient" -->
+                    <!--                             Binding="{Binding Patient.LastName}" -->
+                    <!--                             Width="200" /> -->
+                    <!--         <DataGridTextColumn Header="Time" -->
+                    <!--                             Binding="{Binding StartTime}" -->
+                    <!--                             Width="200" /> -->
+                    <!--         <DataGridTextColumn Header="Notes" -->
+                    <!--                             Binding="{Binding Notes}" -->
+                    <!--                             Width="200" /> -->
+                    <!--     </DataGrid.Columns> -->
+                    <!-- </DataGrid> -->
+                    <ListBox ItemsSource="{Binding Appointments}"
+                             SelectedItem="{Binding SelectedAppointment}"
+                             Width="800" Height="400">
+                        
+                    </ListBox>
                 </Border>
-                <Button Content="Go Back"
-                        Command="{Binding GoBack}" />
+                <Grid ColumnDefinitions="Auto, *, Auto, Auto"
+                      ColumnSpacing="8">
+                    <Button Grid.Column="0" Content="Go Back"
+                            Command="{Binding GoBack}" />
+                    <Button Grid.Column="2"
+                            Content="Edit"
+                            Command="{Binding EditAppt}"/>
+                    <Button Grid.Column="3"
+                            Content="Delete"
+                            Command="{Binding DeleteAppointment}"/>
+                </Grid>
+
             </StackPanel>
         </Grid>
     </Border>

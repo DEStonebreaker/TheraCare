@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using Avalonia.TheraCare.Messages;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -11,6 +12,7 @@ namespace Avalonia.TheraCare.ViewModels.Appointments;
 public partial class AppointmentManagementViewModel : ViewModelBase
 {
     // Collection to be used in DataGrid
+    [ObservableProperty] private Appointment? _selectedAppointment;
     [ObservableProperty] private ObservableCollection<Appointment> _appointments;
 
     /**
@@ -29,5 +31,25 @@ public partial class AppointmentManagementViewModel : ViewModelBase
     public void GoBack()
     {
         WeakReferenceMessenger.Default.Send(new ViewChangeMessage(new AppointmentViewModel()));
+    }
+    
+    [RelayCommand]
+    public void EditAppt()
+    {
+        if (SelectedAppointment == null) return;
+        WeakReferenceMessenger.Default.Send(new ViewChangeMessage(new AppointmentCreationViewModel(SelectedAppointment)));
+    }
+
+    [RelayCommand]
+    public async Task DeleteAppointment()
+    {
+        await Task.Run(() =>
+        {
+            if (SelectedAppointment == null) return;
+
+            AppointmentProxy.Current.Delete(SelectedAppointment.Id);
+            Appointments.Remove(SelectedAppointment);
+            SelectedAppointment = null;
+        });
     }
 }

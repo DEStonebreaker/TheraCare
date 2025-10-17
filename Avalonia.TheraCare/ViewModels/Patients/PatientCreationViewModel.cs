@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Avalonia.TheraCare.Messages;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -22,6 +23,13 @@ public partial class PatientCreationViewModel : ViewModelBase
     [ObservableProperty] private string _medications;
     [ObservableProperty] private string _diagnosis;
     [ObservableProperty] private string _title = "Patient Creation";
+
+    public List<string> GenderOpts { get; } = new List<string>
+    {
+        "Male",
+        "Female",
+        "Other",
+    };
 
     private bool updateMode = false;
 

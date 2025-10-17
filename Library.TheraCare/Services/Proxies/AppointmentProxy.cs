@@ -25,7 +25,7 @@ public class AppointmentProxy
             return _instance;
         }
     }
-    
+
     public bool Create(Appointment appointment)
     {
         lock (_lock)
@@ -41,22 +41,33 @@ public class AppointmentProxy
         }
     }
 
-    public void Update(Appointment appointment)
+    public bool Update(Appointment appointment)
     {
         lock (_lock)
         {
-            if (_appointments.Find(x => x.Id == appointment.Id) == null)
+            var existingAppt = _appointments.FirstOrDefault(x => x.Id == appointment.Id);
+            if (existingAppt == null)
             {
-                return;
+                return false;
+            }
+
+            var conflictingAppt = _appointments.FirstOrDefault(appt =>
+                appt.Id != appointment.Id && // Exclude the current appointment
+                appt.StartTime == appointment.StartTime);
+
+            if (conflictingAppt != null)
+            {
+                return false;
             }
 
             int idx = _appointments.FindIndex(x => x.Id == appointment.Id);
             if (idx != -1)
             {
                 _appointments[idx] = appointment;
-            }  
+            }
+
+            return true;
         }
-        
     }
 
     public void Delete(Guid id)
@@ -94,5 +105,4 @@ public class AppointmentProxy
             Console.WriteLine(appointment);
         }
     }
-
 }

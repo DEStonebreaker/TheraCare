@@ -16,4 +16,17 @@ public static class AppointmentFactory
             Notes = inNotes,
         };
     }
+    
+    public static Appointment ApptUpdateArgs(Guid id, Physician inPhysician, Patient inPatient, DateTime? inTime, bool  inIsBooked, string? inNotes)
+    {
+        return new Appointment
+        {
+            Id = id,
+            Physician = inPhysician,
+            Patient = inPatient,
+            StartTime = inTime,
+            IsBooked = inIsBooked,
+            Notes = inNotes,
+        };
+    }
 }

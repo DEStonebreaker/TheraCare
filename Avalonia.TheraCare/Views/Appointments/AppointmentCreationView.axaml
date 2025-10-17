@@ -41,7 +41,7 @@
 
                     <TimePicker ClockIdentifier="12HourClock"
                                 MinuteIncrement="30"
-                                HorizontalAlignment="Center"
+                                HorizontalAlignment="Stretch"
                                 SelectedTime="{Binding ApptSpan}" />
 
                     <TextBox HorizontalAlignment="Center"
@@ -51,18 +51,21 @@
                              Watermark="Notes"
                              Text="{Binding Notes}" />
 
+                    <Grid ColumnDefinitions="Auto, *, Auto">
+                        
+                    </Grid>
                     <Button Content="Submit"
-                            Command="{Binding CreateAppointment}"
+                            Command="{Binding Submit}"
                             Width="300"
                             IsEnabled="{Binding IsActive}"
                             HorizontalAlignment="Center"
                             HorizontalContentAlignment="Center" />
 
-                    <Button Content="Debug"
-                            Width="300"
-                            Command="{Binding DisplayEm}"
-                            HorizontalAlignment="Center"
-                            HorizontalContentAlignment="Center" />
+                    <!-- <Button Content="Debug" -->
+                    <!--         Width="300" -->
+                    <!--         Command="{Binding DisplayEm}" -->
+                    <!--         HorizontalAlignment="Center" -->
+                    <!--         HorizontalContentAlignment="Center" /> -->
 
                     <Button Content="Back"
                             Command="{Binding GoToHome}"

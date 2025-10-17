@@ -50,13 +50,13 @@
                                             SelectedDate="{Binding BirthDate}" />
                     </Grid>
                     <Grid ColumnDefinitions="Auto, *, Auto">
-                        <!-- <ComboBox Grid.Column="0" -->
-                        <!--           VerticalAlignment="Center" -->
-                        <!--           Width="100" -->
-                        <!--           PlaceholderText="Sex"> -->
-                        <!--     <ComboBoxItem Content="Male"/> -->
-                        <!--     <ComboBoxItem Content="Female"/> -->
-                        <!-- </ComboBox> -->
+                        <ComboBox Grid.Column="0"
+                                  ItemsSource="{Binding GenderOpts}"
+                                  VerticalAlignment="Center"
+                                  Width="100"
+                                  PlaceholderText="Sex"
+                                  SelectedItem="{Binding Gender}">
+                        </ComboBox>
                         <TextBox Grid.Column="2"
                                  Width="120"
                                  Height="24"
