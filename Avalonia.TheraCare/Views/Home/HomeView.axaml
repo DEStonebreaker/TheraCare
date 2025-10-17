@@ -1,0 +1,29 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:home="clr-namespace:Avalonia.TheraCare.ViewModels.Home"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="home:HomeViewModel"
+             x:Class="Avalonia.TheraCare.Views.Home.HomeView">
+
+    <Border>
+        <StackPanel Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Spacing="5">
+            <Button Content="Patient"
+                    Command="{Binding GoToPatient}"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center" />
+            <Button Content="Physician"
+                    Command="{Binding GoToPhysician}"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center" />
+            <Button Content="Appt. Management"
+                    Command="{Binding GoToAdmin}"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center" />
+        </StackPanel>
+    </Border>
+
+
+</UserControl>

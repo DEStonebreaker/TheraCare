@@ -1,0 +1,30 @@
+{
+    "GeneralSettings": {
+        "NetProjectPath": "Avalonia.TheraCare.csproj",
+        "ApplicationName": "TheraCareAlpha",
+        "Version": "0.2.0",
+        "PackageName": {
+            "$type": "msbuild",
+            "property": "AssemblyName"
+        },
+        "AssemblyName": {
+            "$type": "msbuild",
+            "property": "AssemblyName"
+        }
+    },
+    "LinuxSettings": {
+        "Maintainer": "DEStonebreaker"
+    },
+    "Win32Settings": {
+        "IncludeUninstaller": "True"
+    },
+    "MacOsSettings": {
+        "CreateBundle": true,
+        "BundleIdentifier": "com.CompanyName.Avalonia-TheraCare",
+        "SigningCredentialsType": "AdHoc"
+    },
+    "PublishSettings": {
+        "PublishSingleFile": "True",
+        "ExtraBuildProperties": {}
+    }
+}

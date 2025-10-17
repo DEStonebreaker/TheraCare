@@ -1,0 +1,102 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
+             xmlns:patients="clr-namespace:Avalonia.TheraCare.ViewModels.Patients"
+             x:DataType="patients:PatientCreationViewModel"
+             x:Class="Avalonia.TheraCare.Views.Patients.PatientCreationView">
+
+    <Border>
+        <Grid ColumnDefinitions="Auto, *, Auto"
+              Background="WhiteSmoke">
+            <Grid Grid.Column="1"
+                  Width="800"
+                  ShowGridLines="False"
+                  ColumnDefinitions="Auto, *, Auto"
+                  HorizontalAlignment="Center">
+                <StackPanel Grid.Column="1"
+                            Margin="8"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Spacing="10">
+                    <TextBlock Text="{Binding Title}"
+                               HorizontalAlignment="Center" />
+                    <TextBox
+                        Width="250"
+                        Height="24"
+                        Watermark="First Name"
+                        Text="{Binding FirstName}" />
+                    <TextBox
+                        Width="250"
+                        Height="24"
+                        Watermark="Last Name"
+                        Text="{Binding LastName}" />
+                    <TextBox
+                        Width="250"
+                        Height="24"
+                        Watermark="Address"
+                        Text="{Binding Address}" />
+                    <Grid ColumnDefinitions="*, Auto">
+                        <TextBlock Grid.Column="0"
+                                   Text="Date of Birth:     "
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center" />
+                        <CalendarDatePicker Grid.Column="1"
+                                            Width="120"
+                                            HorizontalAlignment="Right"
+                                            SelectedDateFormat="Short"
+                                            Margin="0,0,0,0"
+                                            SelectedDate="{Binding BirthDate}" />
+                    </Grid>
+                    <Grid ColumnDefinitions="Auto, *, Auto">
+                        <ComboBox Grid.Column="0"
+                                  ItemsSource="{Binding GenderOpts}"
+                                  VerticalAlignment="Center"
+                                  Width="100"
+                                  PlaceholderText="Sex"
+                                  SelectedItem="{Binding Gender}">
+                        </ComboBox>
+                        <TextBox Grid.Column="2"
+                                 Width="120"
+                                 Height="24"
+                                 Watermark="Race"
+                                 Text="{Binding Race}" />
+                    </Grid>
+
+                    <TextBox
+                        Width="250"
+                        Height="50"
+                        Watermark="Medications"
+                        TextWrapping="Wrap"
+                        AcceptsReturn="True"
+                        Text="{Binding Medications}" />
+                    <TextBox
+                        Width="250"
+                        Height="50"
+                        Watermark="Diagnosis'"
+                        TextWrapping="Wrap"
+                        AcceptsReturn="True"
+                        Text="{Binding Diagnosis}" />
+                    <Grid ColumnDefinitions="Auto, *, Auto">
+                        <Button Grid.Column="0"
+                                HorizontalAlignment="Left"
+                                HorizontalContentAlignment="Center"
+                                Width="60"
+                                Content="Back"
+                                Command="{Binding GoBack}" />
+                        <Button Grid.Column="2"
+                                HorizontalAlignment="Right"
+                                HorizontalContentAlignment="Center"
+                                Width="80"
+                                Content="Submit"
+                                IsEnabled="{Binding Submitable}"
+                                Command="{Binding Submit}" />
+                    </Grid>
+
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Border>
+
+</UserControl>

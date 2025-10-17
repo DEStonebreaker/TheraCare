@@ -1,0 +1,60 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
+             xmlns:physicians="clr-namespace:Avalonia.TheraCare.ViewModels.Physicians"
+             x:DataType="physicians:PhysicianManagementViewModel"
+             x:Class="Avalonia.TheraCare.Views.Physicians.PhysicianManagementView">
+
+    <Border>
+        <Grid ColumnDefinitions="Auto, *, Auto"
+              Background="WhiteSmoke"
+              ShowGridLines="False">
+            <Grid Column="1"
+                  Width="800"
+                  ShowGridLines="False"
+                  ColumnDefinitions="Auto, *, Auto"
+                  HorizontalAlignment="Center">
+                <StackPanel Grid.Column="1"
+                            Margin="8"
+                            Width="750"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Spacing="10">
+                    <TextBlock Foreground="Black"
+                               Text="Physician Management"
+                               HorizontalAlignment="Center" />
+                    <Border HorizontalAlignment="Center"
+                            Height="400">
+                        <ListBox Width="750"
+                                 ItemsSource="{Binding Physicians}"
+                                 SelectedItem="{Binding SelectedPhysician}" />
+                    </Border>
+
+                    <Grid ColumnDefinitions="Auto, *, Auto, Auto, Auto"
+                          ColumnSpacing="8"
+                          ShowGridLines="False">
+                        <Button Grid.Column="0" Content="Go Back"
+                                Command="{Binding GoBack}"
+                                HorizontalAlignment="Left" />
+                        <!-- <TextBox Grid.Column="2" -->
+                        <!--          Watermark="Search by name" -->
+                        <!--          Width="200" -->
+                        <!--          HorizontalAlignment="Right" /> -->
+                        <Button Grid.Column="3"
+                                Content="Edit"
+                                Command="{Binding EditPhysician}"
+                                HorizontalAlignment="Right" />
+                        <Button Grid.Column="4"
+                                Content="Delete"
+                                Command="{Binding AsyncDeletePhysician}"
+                                HorizontalAlignment="Right" />
+                    </Grid>
+
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Border>
+
+</UserControl>

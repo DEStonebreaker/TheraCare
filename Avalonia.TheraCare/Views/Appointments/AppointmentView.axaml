@@ -1,0 +1,36 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:appointments="clr-namespace:Avalonia.TheraCare.ViewModels.Appointments"
+             x:DataType="appointments:AppointmentViewModel"
+             x:Class="Avalonia.TheraCare.Views.Appointments.AppointmentView">
+
+    <Border>
+        <Grid ColumnDefinitions="*, Auto, *"
+              Background="WhiteSmoke">
+            <Grid Grid.Column="1"
+                  Width="880">
+                <StackPanel HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Width="250"
+                            Spacing="5">
+                    <Button Content="Create Appointment"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Center"
+                            Command="{Binding GoToCreation}" />
+                    <Button Content="Appointment Management"
+                            Command="{Binding GoToManagement}"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Center" />
+                    <Button Content="Back"
+                            Command="{Binding GoToHome}"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Center" />
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Border>
+
+</UserControl>

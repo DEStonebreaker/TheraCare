@@ -1,0 +1,70 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
+             xmlns:appointments="clr-namespace:Avalonia.TheraCare.ViewModels.Appointments"
+             x:DataType="appointments:AppointmentManagementViewModel"
+             x:Class="Avalonia.TheraCare.Views.Appointments.AppointmentManagementView">
+
+    <Border>
+        <Grid ColumnDefinitions="Auto, *, Auto">
+            <StackPanel Grid.Column="1"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Width="800"
+                        Spacing="5">
+
+                <TextBlock Text="Appointment Management"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,8" />
+
+                <Border Background="LightGray"
+                        Width="800"
+                        Height="400">
+                    <!-- <DataGrid -->
+                    <!--     ItemsSource="{Binding Appointments}" -->
+                    <!--     SelectedItem="{Binding SelectedAppointment}" -->
+                    <!--     Width="800" -->
+                    <!--     Height="400" -->
+                    <!--     AutoGenerateColumns="False" -->
+                    <!--     IsReadOnly="True" -->
+                    <!--     BorderBrush="Gray"> -->
+                    <!--     <DataGrid.Columns> -->
+                    <!--         <DataGridTextColumn Header="Physician" -->
+                    <!--                             Binding="{Binding Physician.LastName}" -->
+                    <!--                             Width="200" /> -->
+                    <!--         <DataGridTextColumn Header="Patient" -->
+                    <!--                             Binding="{Binding Patient.LastName}" -->
+                    <!--                             Width="200" /> -->
+                    <!--         <DataGridTextColumn Header="Time" -->
+                    <!--                             Binding="{Binding StartTime}" -->
+                    <!--                             Width="200" /> -->
+                    <!--         <DataGridTextColumn Header="Notes" -->
+                    <!--                             Binding="{Binding Notes}" -->
+                    <!--                             Width="200" /> -->
+                    <!--     </DataGrid.Columns> -->
+                    <!-- </DataGrid> -->
+                    <ListBox ItemsSource="{Binding Appointments}"
+                             SelectedItem="{Binding SelectedAppointment}"
+                             Width="800" Height="400">
+                        
+                    </ListBox>
+                </Border>
+                <Grid ColumnDefinitions="Auto, *, Auto, Auto"
+                      ColumnSpacing="8">
+                    <Button Grid.Column="0" Content="Go Back"
+                            Command="{Binding GoBack}" />
+                    <Button Grid.Column="2"
+                            Content="Edit"
+                            Command="{Binding EditAppt}"/>
+                    <Button Grid.Column="3"
+                            Content="Delete"
+                            Command="{Binding DeleteAppointment}"/>
+                </Grid>
+
+            </StackPanel>
+        </Grid>
+    </Border>
+
+</UserControl>

@@ -1,37 +1,21 @@
-﻿using System;
-using Avalonia.TheraCare.Messages;
+﻿using Avalonia.TheraCare.Messages;
+using Avalonia.TheraCare.ViewModels.Dialogues;
+using Avalonia.TheraCare.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 
 namespace Avalonia.TheraCare.ViewModels;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
-    
-    // MainVM
     [ObservableProperty] private ViewModelBase _currentViewModel;
-    
-    // ViewModels for Navigation
-    private readonly HomeViewModel _homeViewModel = new ();
-    // private readonly PatientViewModel _patientViewModel = new ();
-    
-    // Subscribe to Messages of ViewChange
+    private readonly Home.HomeViewModel _homeViewModel = new();
+
+    // Subscribes to Messages of ViewChange Type
     public MainWindowViewModel()
     {
         CurrentViewModel = _homeViewModel;
         WeakReferenceMessenger.Default.Register<ViewChangeMessage>
-            (this, (r, e) =>
-            {
-                CurrentViewModel = e.Value;
-            });
+            (this, (r, e) => { CurrentViewModel = e.Value; });
     }
-
-    // Un-needed. Shifting navigation to respective view models.
-    // [RelayCommand]
-    // private void GoToPatient()
-    // {
-    //     CurrentViewModel = new PatientViewModel();
-    // }
-    
 }

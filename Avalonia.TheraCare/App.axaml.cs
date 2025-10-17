@@ -6,6 +6,9 @@ using System.Linq;
 using Avalonia.Markup.Xaml;
 using Avalonia.TheraCare.ViewModels;
 using Avalonia.TheraCare.Views;
+using CommunityToolkit.Mvvm.ComponentModel;
+using Library.TheraCare.Services.Proxies;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Avalonia.TheraCare;
 
@@ -30,6 +33,7 @@ public partial class App : Application
         }
         DataTemplates.Add(new ViewLocator());
         base.OnFrameworkInitializationCompleted();
+        
     }
 
     private void DisableAvaloniaDataAnnotationValidation()

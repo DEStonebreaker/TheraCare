@@ -8,7 +8,6 @@
         Height="720"
         x:Class="Avalonia.TheraCare.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
-        xmlns:views="clr-namespace:Avalonia.TheraCare.Views"
         Icon="/Assets/avalonia-logo.ico"
         Title="COP4870 Fall 2025">
 
@@ -24,19 +23,19 @@
         <Border Grid.Column="0" Padding="10" Background="#782F40">
             <Grid RowDefinitions="24">
                 <TextBlock FontFamily="Times New Roman"
-                                   Foreground="White"
-                                   FontSize="24"
-                                   FontWeight="Bold"
-                                   Text="TheraCare Health"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center" />
+                           Foreground="White"
+                           FontSize="24"
+                           FontWeight="Bold"
+                           Text="TheraCare Health"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center" />
             </Grid>
         </Border>
 
         <Grid Grid.Row="1">
-            <ContentControl Content="{Binding CurrentViewModel}"/>
+            <ContentControl Content="{Binding CurrentViewModel}" />
         </Grid>
-        
+
     </Grid>
 
 </Window>

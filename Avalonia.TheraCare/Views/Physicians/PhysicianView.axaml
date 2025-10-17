@@ -1,0 +1,30 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:physicians="clr-namespace:Avalonia.TheraCare.ViewModels.Physicians"
+             x:DataType="physicians:PhysicianViewModel"
+             x:Class="Avalonia.TheraCare.Views.Physicians.PhysicianView">
+
+    <Border Background="WhiteSmoke">
+        <StackPanel Width="250"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Spacing="5">
+            <Button Content="Create Physician"
+                    Command="{Binding GoToCreation}"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center" />
+            <Button Content="Physician Management"
+                    Command="{Binding GoToPhysicianManagement}"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center" />
+            <Button Content="Back"
+                    Command="{Binding GoToHome}"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center" />
+        </StackPanel>
+    </Border>
+
+</UserControl>
