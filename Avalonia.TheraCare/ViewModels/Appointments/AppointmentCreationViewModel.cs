@@ -98,6 +98,11 @@ public partial class AppointmentCreationViewModel : ViewModelBase
     [RelayCommand]
     public void GoToHome()
     {
+        if (UpdateMode)
+        {
+            WeakReferenceMessenger.Default.Send(new ViewChangeMessage(new AppointmentManagementViewModel()));
+        }
+
         WeakReferenceMessenger.Default.Send(new ViewChangeMessage(new AppointmentViewModel()));
     }
 

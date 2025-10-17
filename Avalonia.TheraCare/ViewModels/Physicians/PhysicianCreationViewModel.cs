@@ -21,7 +21,7 @@ public partial class PhysicianCreationViewModel : ViewModelBase
     [ObservableProperty] private string? _specialization;
     [ObservableProperty] private string? _updated;
     [ObservableProperty] private string? _title = "Physician Creation";
-    private bool CanSubmit { get; set; } = true;
+    [ObservableProperty] private bool _canSubmit;
     private bool _updateMode;
 
     // CTORS. Default and Physician Edits.
@@ -79,7 +79,58 @@ public partial class PhysicianCreationViewModel : ViewModelBase
         WeakReferenceMessenger.Default.Send(new ViewChangeMessage(new PhysicianViewModel()));
     }
 
+    partial void OnFirstNameChanged(string? value)
+    {
+        CanSubmit = CanSubmitCheck();
+    }
+    partial void OnLastNameChanged(string? value)
+    {
+        CanSubmit = CanSubmitCheck();
+    }
+    partial void OnGradDateChanged(DateTime? value)
+    {
+        CanSubmit = CanSubmitCheck();
+    }
+
+    partial void OnSpecializationChanged(string? value)
+    {
+        CanSubmit = CanSubmitCheck();
+    }
+    
+    partial void OnLicenseNumberChanged(string? value)
+    {
+        CanSubmit = CanSubmitCheck();
+    }
+
     // Helper Functions
+    public bool CanSubmitCheck()
+    {
+        if (FirstName == null || FirstName == "")
+        {
+            return false;
+        }
+        if (LastName == null || LastName == "")
+        {
+            return false;
+        }
+
+        if (GradDate == null)
+        {
+            return false;
+        }
+
+        if (Specialization == null || Specialization == "")
+        {
+            return false;
+        }
+        
+        if (LicenseNumber == null || LicenseNumber == "")
+        {
+            return false;
+        }
+
+        return true;
+    }
 
     private void ClearFields()
     {

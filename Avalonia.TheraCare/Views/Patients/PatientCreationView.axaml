@@ -90,6 +90,7 @@
                                 HorizontalContentAlignment="Center"
                                 Width="80"
                                 Content="Submit"
+                                IsEnabled="{Binding Submitable}"
                                 Command="{Binding Submit}" />
                     </Grid>
 

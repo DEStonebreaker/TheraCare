@@ -23,6 +23,7 @@ public partial class PatientCreationViewModel : ViewModelBase
     [ObservableProperty] private string _medications;
     [ObservableProperty] private string _diagnosis;
     [ObservableProperty] private string _title = "Patient Creation";
+    [ObservableProperty] private bool _submitable;
 
     public List<string> GenderOpts { get; } = new List<string>
     {
@@ -100,7 +101,41 @@ public partial class PatientCreationViewModel : ViewModelBase
         WeakReferenceMessenger.Default.Send(new ViewChangeMessage(new PatientViewModel()));
     }
 
+    partial void OnFirstNameChanged(string? value)
+    {
+        Submitable = CanSubmit();
+    }
+    
+    partial void OnLastNameChanged(string? value)
+    {
+        Submitable = CanSubmit();
+    }
+
+    partial void OnBirthDateChanged(DateTime? value)
+    {
+        Submitable = CanSubmit();
+    }
+
     // Helper Functions
+    
+    private bool CanSubmit()
+    {
+        if (FirstName == null || FirstName == "")
+        {
+            return false;
+        }
+        if (LastName == null || LastName == "")
+        {
+            return false;
+        }
+
+        if (BirthDate == null)
+        {
+            return false;
+        }
+
+        return true;
+    }
 
     private void ClearFields()
     {
