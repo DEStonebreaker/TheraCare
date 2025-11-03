@@ -20,7 +20,7 @@ public class Appointment
     {
         return $"Dr. {Physician?.LastName}, {Physician?.FirstName}\n" +
                $"Patient: {Patient?.LastName}, {Patient?.FirstName}\n" +
-               $"Date: {StartTime:d}\n" +
+               $"Date: {StartTime}\n" +
                $"Notes: {Notes}";
     }
 }
