@@ -22,13 +22,33 @@
     <Grid Background="WhiteSmoke" RowDefinitions="Auto, *">
         <Border Grid.Column="0" Padding="10" Background="#782F40">
             <Grid RowDefinitions="24">
-                <TextBlock FontFamily="Times New Roman"
+                <TextBlock Grid.Column="0"
+                           FontFamily="Times New Roman"
                            Foreground="White"
                            FontSize="24"
                            FontWeight="Bold"
                            Text="TheraCare Health"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center" />
+                <StackPanel HorizontalAlignment="Right"
+                            Orientation="Horizontal"
+                            Spacing="5">
+                    <Button Foreground="White"
+                            FontWeight="DemiBold"
+                            Height="32"
+                            Content="Export" 
+                            Command="{Binding Export}">
+                        <ToolTip.Tip>Exports JSON to tmp file, may overwrite old data</ToolTip.Tip>
+                    </Button>
+                    <Button Foreground="White"
+                            FontWeight="DemiBold"
+                            Height="32"
+                            Content="Import" 
+                            Command="{Binding Import}">
+                        <ToolTip.Tip>Import JSON from tmp file, may overwrite current data</ToolTip.Tip>
+                    </Button>
+                </StackPanel>
+
             </Grid>
         </Border>
 
