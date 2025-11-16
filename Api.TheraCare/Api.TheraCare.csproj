@@ -11,11 +11,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Models\" />
+        <Folder Include="Models\"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Library.TheraCare\Library.TheraCare.csproj" />
+        <ProjectReference Include="..\Library.TheraCare\Library.TheraCare.csproj"/>
     </ItemGroup>
 
 </Project>

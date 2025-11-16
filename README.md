@@ -3,6 +3,22 @@ Donovan Stonebreaker
 Professor: Christopher Mills  
 
 C# v8.0, using Avalonia GUI Framework
+****
+### Requirements / Dependencies:
+The built in api view / launcher uses the Avalonia UI WebView component. If you are using the complete executable then you will need to ensure the following.
 
-### Building TheraCare
-For some reason, Visual Studio doesn't seem to want to build this project for me so it is probably best to just go into the Avalonia.TheraCare directory and dotnet build from there. I'm also going to attach two executables to the release tab.
+Windows: 
+****
+#### To Use: 
+Start the backend
+```
+~$ cd ./Api.TheraCare/
+~$ dotnet build; dotnet run;
+    # Open the local host link to view Swagger.
+```
+
+To start the frontend, you can use the given executable file or in a new terminal tab, build and launch.
+```
+~$ cd ./Avalonia.TheraCare/
+~$ dotnet build; dotnet run;
+```

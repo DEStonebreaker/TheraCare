@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Avalonia.Controls;
 using Avalonia.TheraCare.Messages;
 using Avalonia.TheraCare.ViewModels.Dialogues;
 using Avalonia.TheraCare.Views;
+using Avalonia.TheraCare.Views.Dialogues;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
@@ -28,7 +30,8 @@ public partial class MainWindowViewModel : ViewModelBase
         CurrentViewModel = _homeViewModel;
         WeakReferenceMessenger.Default.Register<ViewChangeMessage>
             (this, (r, e) => { CurrentViewModel = e.Value; });
-
+        
+        
         var configDir = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
             "TheraCare"
@@ -38,8 +41,9 @@ public partial class MainWindowViewModel : ViewModelBase
         tmpFile = Path.Combine(configDir, "theracare_data.json");
         if (!File.Exists(tmpFile))
             File.Create(tmpFile);
+        
     }
-
+    
     [RelayCommand]
     public async Task Export()
     {

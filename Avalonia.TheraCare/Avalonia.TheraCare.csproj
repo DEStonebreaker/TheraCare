@@ -12,10 +12,11 @@
         <AvaloniaResource Include="Assets\**"/>
     </ItemGroup>
 
+
     <ItemGroup>
         <PackageReference Include="Avalonia" Version="11.3.6"/>
-        <PackageReference Include="Avalonia.Controls.ColorPicker" Version="11.3.6" />
-        <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.3.6" />
+        <PackageReference Include="Avalonia.Controls.ColorPicker" Version="11.3.6"/>
+        <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.3.6"/>
         <PackageReference Include="Avalonia.Desktop" Version="11.3.6"/>
         <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.6"/>
         <PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.6"/>
@@ -25,58 +26,58 @@
             <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
         </PackageReference>
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1"/>
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.9" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.9"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Assets\Fonts\" />
-      <Folder Include="Models\" />
+        <Folder Include="Assets\Fonts\"/>
+        <Folder Include="Models\"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Library.TheraCare\Library.TheraCare.csproj" />
+        <ProjectReference Include="..\Library.TheraCare\Library.TheraCare.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Views\Appointments\AppointmentCreationView.axaml.cs">
-        <DependentUpon>AppointmentCreationView.axaml</DependentUpon>
-        <SubType>Code</SubType>
-      </Compile>
-      <Compile Update="Views\Appointments\AppointmentManagementView.axaml.cs">
-        <DependentUpon>AppointmentManagementView.axaml</DependentUpon>
-        <SubType>Code</SubType>
-      </Compile>
-      <Compile Update="Views\Appointments\AppointmentView.axaml.cs">
-        <DependentUpon>AppointmentView.axaml</DependentUpon>
-        <SubType>Code</SubType>
-      </Compile>
-      <Compile Update="Views\Patients\PatientCreationView.axaml.cs">
-        <DependentUpon>PatientCreationView.axaml</DependentUpon>
-        <SubType>Code</SubType>
-      </Compile>
-      <Compile Update="Views\Patients\PatientManagementView.axaml.cs">
-        <DependentUpon>PatientManagementView.axaml</DependentUpon>
-        <SubType>Code</SubType>
-      </Compile>
-      <Compile Update="Views\Patients\PatientView.axaml.cs">
-        <DependentUpon>PatientView.axaml</DependentUpon>
-        <SubType>Code</SubType>
-      </Compile>
-      <Compile Update="Views\Physicians\PhysicianCreationView.axaml.cs">
-        <DependentUpon>PhysicianCreationView.axaml</DependentUpon>
-        <SubType>Code</SubType>
-      </Compile>
-      <Compile Update="Views\Physicians\PhysicianManagementView.axaml.cs">
-        <DependentUpon>PhysicianManagementView.axaml</DependentUpon>
-        <SubType>Code</SubType>
-      </Compile>
-      <Compile Update="Views\Physicians\PhysicianView.axaml.cs">
-        <DependentUpon>PhysicianView.axaml</DependentUpon>
-        <SubType>Code</SubType>
-      </Compile>
-      <Compile Update="Views\Home\HomeView.axaml.cs">
-        <DependentUpon>HomeView.axaml</DependentUpon>
-        <SubType>Code</SubType>
-      </Compile>
+        <Compile Update="Views\Appointments\AppointmentCreationView.axaml.cs">
+            <DependentUpon>AppointmentCreationView.axaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Appointments\AppointmentManagementView.axaml.cs">
+            <DependentUpon>AppointmentManagementView.axaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Appointments\AppointmentView.axaml.cs">
+            <DependentUpon>AppointmentView.axaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Patients\PatientCreationView.axaml.cs">
+            <DependentUpon>PatientCreationView.axaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Patients\PatientManagementView.axaml.cs">
+            <DependentUpon>PatientManagementView.axaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Patients\PatientView.axaml.cs">
+            <DependentUpon>PatientView.axaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Physicians\PhysicianCreationView.axaml.cs">
+            <DependentUpon>PhysicianCreationView.axaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Physicians\PhysicianManagementView.axaml.cs">
+            <DependentUpon>PhysicianManagementView.axaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Physicians\PhysicianView.axaml.cs">
+            <DependentUpon>PhysicianView.axaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
+        <Compile Update="Views\Home\HomeView.axaml.cs">
+            <DependentUpon>HomeView.axaml</DependentUpon>
+            <SubType>Code</SubType>
+        </Compile>
     </ItemGroup>
 </Project>
