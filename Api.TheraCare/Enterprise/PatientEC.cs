@@ -22,6 +22,34 @@ public class PatientEC
         {
             FakeDatabase.Patients.Remove(toRemove);
         }
+
         return toRemove;
+    }
+
+    public Patient? Post(Patient patient)
+    {
+        var state = GetById(patient.Id);
+        if (state != null) return null;
+        
+        FakeDatabase.Patients.Add(patient);
+        return patient;
+    }
+
+    public bool Put(Guid id, Patient patient)
+    {
+        var pati = FakeDatabase.Patients.FirstOrDefault(p => p.Id == patient.Id);
+        if (pati == null)
+        {
+            return false;
+        }
+
+        int index = FakeDatabase.Patients.FindIndex(p => p.Id == patient.Id);
+        if (index != -1)
+        {
+            FakeDatabase.Patients[index] = patient;
+            return true;
+        }
+
+        return false;
     }
 }

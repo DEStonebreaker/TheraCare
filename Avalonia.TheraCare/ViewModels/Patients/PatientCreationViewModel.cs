@@ -7,6 +7,7 @@ using CommunityToolkit.Mvvm.Messaging;
 using Library.TheraCare.Models;
 using Library.TheraCare.Services.Factories;
 using Library.TheraCare.Services.Proxies;
+using Library.TheraCare.Utilities;
 
 namespace Avalonia.TheraCare.ViewModels.Patients;
 
