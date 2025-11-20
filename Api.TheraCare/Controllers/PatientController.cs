@@ -13,7 +13,7 @@ public class PatientController : Controller
     // {
     //     return View();
     // }
-    
+
     private readonly ILogger<PatientController> _logger;
 
     public PatientController(ILogger<PatientController> logger)
@@ -37,5 +37,17 @@ public class PatientController : Controller
     public Patient? Delete(Guid id)
     {
         return new PatientEC().Delete(id);
+    }
+
+    [HttpPost]
+    public Patient? Post([FromBody] Patient patient)
+    {
+        return new PatientEC().Post(patient);
+    }
+
+    [HttpPut("{id}")]
+    public void Put(Guid id, [FromBody] Patient patient)
+    {
+        var resp = new PatientEC().Put(id, patient);
     }
 }
