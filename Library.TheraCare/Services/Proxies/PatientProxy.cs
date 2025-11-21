@@ -1,6 +1,8 @@
 using System.Collections.ObjectModel;
 using Library.TheraCare.Models;
 using Library.TheraCare.Services.Factories;
+using Library.TheraCare.Utilities;
+using Newtonsoft.Json;
 
 namespace Library.TheraCare.Services.Proxies;
 
@@ -8,10 +10,15 @@ public class PatientProxy
 {
     private static PatientProxy? _instance;
     private static readonly object _lock = new object();
-    private readonly List<Patient> _patients = new List<Patient>();
+    private List<Patient?> _patients = new List<Patient?>();
 
     private PatientProxy()
     {
+        var PatientResponse = new WebRequestHandler().Get("/Patient").Result;
+        if (PatientResponse != null)
+        {
+            _patients = JsonConvert.DeserializeObject<List<Patient?>>(PatientResponse) ?? new List<Patient?>();
+        }
     }
 
     public static PatientProxy Current
@@ -33,7 +40,13 @@ public class PatientProxy
         {
             lock (_lock)
             {
-                return _patients.ToList(); // Return a copy to prevent external modification
+                var GetResponse = new WebRequestHandler().Get("/Patient").Result;
+                if (GetResponse != null)
+                {
+                    _patients = JsonConvert.DeserializeObject<List<Patient>>(GetResponse) ?? new List<Patient>();
+                }
+
+                return _patients.ToList();
             }
         }
     }
@@ -43,48 +56,58 @@ public class PatientProxy
         lock (_lock)
         {
             // Patient patient = PatientFactory.FromCli();
-            _patients.Add(patient);
+            var PostRequest = new WebRequestHandler().Post("/Patient", patient);
+            if (PostRequest != null)
+            {
+                _patients.Add(patient);
+            }
+
             return patient;
         }
     }
 
-    public Patient? GetPatient(Guid id)
+    public async Task<Patient?> GetPatient(Guid id)
     {
-        lock (_lock)
+        try
         {
-            return _patients.FirstOrDefault(p => p.Id == id);
+            var GetRequest = await new WebRequestHandler().Get("/Patient/" + id);
+            if (GetRequest != null)
+            {
+                return JsonConvert.DeserializeObject<Patient>(GetRequest);
+            }
         }
+        catch (Exception e)
+        {
+        }
+
+        return null;
     }
-    
+
     public ObservableCollection<Patient> GetPatients()
     {
         return new ObservableCollection<Patient>(_patients);
     }
 
-    public bool UpdatePatient(Patient patient)
+    public async Task<bool> UpdatePatient(Patient patient)
     {
-        lock (_lock)
+        var response = await new WebRequestHandler().Put($"/Patient/{patient.Id}", patient);
+        if (response != null)
         {
-            var pati = _patients.FirstOrDefault(p => p.Id == patient.Id);
-            if (pati == null)
-            {
-                return false;
-            }
-
             int index = _patients.FindIndex(p => p.Id == patient.Id);
             if (index != -1)
             {
                 _patients[index] = patient;
                 return true;
             }
-
-            return false;   
         }
+
+        return false;
     }
 
     public bool DeletePatient(Guid id)
     {
-        lock (_lock)
+        var response = new WebRequestHandler().Delete("/Patient/" + id).Result;
+        if (response != null)
         {
             int index = _patients.FindIndex(p => p.Id == id);
             if (index != -1)
@@ -92,9 +115,9 @@ public class PatientProxy
                 _patients.RemoveAt(index);
                 return true;
             }
-
-            return false;
         }
+
+        return false;
     }
 
     public void DisplayPatients()

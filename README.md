@@ -15,6 +15,8 @@ Start the backend
 ~$ cd ./Api.TheraCare/
 ~$ dotnet build; dotnet run;
     # Open the local host link to view Swagger.
+~$ dotnet run --launch-profile https
+    # Will need to navigate to /swagger after opening.
 ```
 
 To start the frontend, you can use the given executable file or in a new terminal tab, build and launch.

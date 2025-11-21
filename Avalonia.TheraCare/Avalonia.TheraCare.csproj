@@ -35,6 +35,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\Api.TheraCare\Api.TheraCare.csproj" />
         <ProjectReference Include="..\Library.TheraCare\Library.TheraCare.csproj"/>
     </ItemGroup>
 

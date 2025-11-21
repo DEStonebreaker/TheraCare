@@ -68,6 +68,43 @@ namespace Library.TheraCare.Utilities
             return null;
         }
 
+        public async Task<string> Put(string url, object obj)
+        {
+            var fullUrl = $"https://{host}:{port}{url}";
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    using (var request = new HttpRequestMessage(HttpMethod.Put, fullUrl))
+                    {
+                        var json = JsonConvert.SerializeObject(obj);
+                        using (var stringContent = new StringContent(json, Encoding.UTF8, "application/json"))
+                        {
+                            request.Content = stringContent;
+
+                            using (var response = await client
+                                       .SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+                                       .ConfigureAwait(false))
+                            {
+                                if (response.IsSuccessStatusCode)
+                                {
+                                    return await response.Content.ReadAsStringAsync();
+                                }
+                                return "ERROR";
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Error in Put request: {e.Message}");
+            }
+
+            return null;
+        }
+
+        
         public async Task<string> Post(string url, object obj)
         {
             var fullUrl = $"https://{host}:{port}{url}";
