@@ -1,0 +1,6 @@
+@Api.TheraCare_HostAddress = http://localhost:5134
+
+GET {{Api.TheraCare_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

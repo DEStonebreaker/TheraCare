@@ -14,20 +14,29 @@
                   Width="880">
                 <StackPanel HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            Width="250"
+                            Width="325"
                             Spacing="5">
                     <Button Content="Create Appointment"
                             HorizontalAlignment="Stretch"
                             HorizontalContentAlignment="Center"
-                            Command="{Binding GoToCreation}" />
+                            Command="{Binding GoToCreation}"
+                            VerticalContentAlignment="Center"
+                            Height="40"
+                            FontSize="18"/>
                     <Button Content="Appointment Management"
                             Command="{Binding GoToManagement}"
                             HorizontalAlignment="Stretch"
-                            HorizontalContentAlignment="Center" />
+                            HorizontalContentAlignment="Center" 
+                            VerticalContentAlignment="Center"
+                            Height="40"
+                            FontSize="18"/>
                     <Button Content="Back"
                             Command="{Binding GoToHome}"
                             HorizontalAlignment="Stretch"
-                            HorizontalContentAlignment="Center" />
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            Height="40"
+                            FontSize="18"/>
                 </StackPanel>
             </Grid>
         </Grid>
