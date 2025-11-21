@@ -21,10 +21,16 @@ public class PatientController : Controller
         _logger = logger;
     }
 
+    [HttpPost]
+    public Patient? Post([FromBody] Patient patient)
+    {
+        return new PatientEC().Post(patient);
+    }
+
     [HttpGet]
     public IEnumerable<Patient> Get()
     {
-        return new PatientEC().GetBlogs();
+        return new PatientEC().GetPatients();
     }
 
     [HttpGet("{id}")]
@@ -33,21 +39,15 @@ public class PatientController : Controller
         return new PatientEC().GetById(id);
     }
 
-    [HttpDelete("{id}")]
-    public Patient? Delete(Guid id)
-    {
-        return new PatientEC().Delete(id);
-    }
-
-    [HttpPost]
-    public Patient? Post([FromBody] Patient patient)
-    {
-        return new PatientEC().Post(patient);
-    }
-
     [HttpPut("{id}")]
     public void Put(Guid id, [FromBody] Patient patient)
     {
         var resp = new PatientEC().Put(id, patient);
+    }
+
+    [HttpDelete("{id}")]
+    public Patient? Delete(Guid id)
+    {
+        return new PatientEC().Delete(id);
     }
 }

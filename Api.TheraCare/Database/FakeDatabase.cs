@@ -60,4 +60,48 @@ public static class FakeDatabase
             medsIn: "Atorvastatin"
         ),
     };
+
+    public static List<Physician> Physicians = new List<Physician>
+    {
+        new Physician
+        {
+            FirstName = "Sarah",
+            LastName = "Chen",
+            LicenseNumber = "MD-FL-428916",
+            GraduationDate = new DateTime(2015, 5, 15),
+            Specializations = "Cardiology"
+        },
+        new Physician
+        {
+            FirstName = "Michael",
+            LastName = "Rodriguez",
+            LicenseNumber = "MD-FL-391204",
+            GraduationDate = new DateTime(2012, 6, 8),
+            Specializations = "Orthopedic Surgery"
+        },
+        new Physician
+        {
+            FirstName = "Emily",
+            LastName = "Washington",
+            LicenseNumber = "MD-FL-502837",
+            GraduationDate = new DateTime(2018, 5, 20),
+            Specializations = "Pediatrics"
+        },
+        new Physician
+        {
+            FirstName = "James",
+            LastName = "Patel",
+            LicenseNumber = "MD-FL-364729",
+            GraduationDate = new DateTime(2010, 6, 12),
+            Specializations = "Neurology"
+        },
+        new Physician
+        {
+            FirstName = "Rebecca",
+            LastName = "Thompson",
+            LicenseNumber = "MD-FL-447582",
+            GraduationDate = new DateTime(2016, 5, 14),
+            Specializations = "Emergency Medicine"
+        }
+    };
 }

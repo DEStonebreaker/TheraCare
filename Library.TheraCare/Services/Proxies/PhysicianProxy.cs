@@ -1,6 +1,8 @@
 using System.Collections.ObjectModel;
 using Library.TheraCare.Models;
 using Library.TheraCare.Services.Factories;
+using Library.TheraCare.Utilities;
+using Newtonsoft.Json;
 
 namespace Library.TheraCare.Services.Proxies;
 
@@ -8,10 +10,15 @@ public class PhysicianProxy
 {
     private static PhysicianProxy? _instance;
     private static readonly object _lock = new object();
-    private readonly List<Physician> _physicians = new List<Physician>();
+    private List<Physician?> _physicians = new List<Physician>();
 
     private PhysicianProxy()
     {
+        var PhysicianResponse = new WebRequestHandler().Get("/Physician").Result;
+        if (PhysicianResponse != null)
+        {
+            _physicians = JsonConvert.DeserializeObject<List<Physician>>(PhysicianResponse) ?? new List<Physician?>();
+        }
     }
 
     public static PhysicianProxy Current
@@ -33,7 +40,13 @@ public class PhysicianProxy
         {
             lock (_lock)
             {
-                return _physicians.ToList(); // Return a copy to prevent external modification
+                var GetResponse = new WebRequestHandler().Get("/Physician").Result;
+                if (GetResponse != null)
+                {
+                    _physicians = JsonConvert.DeserializeObject<List<Physician>>(GetResponse) ?? new List<Physician>();
+                }
+
+                return _physicians.ToList();
             }
         }
     }
@@ -43,7 +56,15 @@ public class PhysicianProxy
         lock (_lock)
         {
             // Physician physician = PhysicianFactory.FromCli();
-            _physicians.Add(physician);
+            // _physicians.Add(physician);
+            // return physician;
+
+            var PostRequest = new WebRequestHandler().Post("/Physician",physician);
+            if (PostRequest != null)
+            {
+                _physicians.Add(physician);
+            }
+
             return physician;
         }
     }
@@ -53,38 +74,44 @@ public class PhysicianProxy
         return new ObservableCollection<Physician>(_physicians);
     }
 
-    public Physician? GetPhysician(Guid id)
+    public async Task<Physician?> GetPhysician(Guid id)
     {
-        lock (_lock)
+        // return _physicians.FirstOrDefault(p => p.Id == id);
+        try
         {
-            return _physicians.FirstOrDefault(p => p.Id == id);
+            var GetRequest = await new WebRequestHandler().Get("/Physician/" + id);
+            if (GetRequest != null)
+            {
+                return JsonConvert.DeserializeObject<Physician>(GetRequest);
+            }
         }
+        catch (Exception e)
+        {
+        }
+
+        return null;
     }
 
-    public bool UpdatePhysician(Physician physician)
+    public async Task<bool> UpdatePhysician(Physician physician)
     {
-        lock (_lock)
+        var response = await new WebRequestHandler().Put($"/Physician/{physician.Id}", physician);
+        if (response != null)
         {
-            var phys = _physicians.FirstOrDefault(p => p.Id == physician.Id);
-            if (phys == null)
-            {
-                return false;
-            }
-
             int index = _physicians.FindIndex(p => p.Id == physician.Id);
             if (index != -1)
             {
                 _physicians[index] = physician;
                 return true;
             }
-
-            return false;
         }
+
+        return false;
     }
 
-    public bool DeletePhysician(Guid id)
+    public async Task<bool> DeletePhysician(Guid id)
     {
-        lock (_lock)
+        var response = await new WebRequestHandler().Delete($"/Physician/{id}");
+        if (response != null)
         {
             int index = _physicians.FindIndex(p => p.Id == id);
             if (index != -1)
@@ -92,9 +119,9 @@ public class PhysicianProxy
                 _physicians.RemoveAt(index);
                 return true;
             }
-
-            return false;
         }
+
+        return false;
     }
 
     public void DisplayPhysicians()

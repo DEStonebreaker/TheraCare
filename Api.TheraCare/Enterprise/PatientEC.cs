@@ -5,7 +5,7 @@ namespace Api.TheraCare.Enterprise;
 
 public class PatientEC
 {
-    public IEnumerable<Patient> GetBlogs()
+    public IEnumerable<Patient> GetPatients()
     {
         return FakeDatabase.Patients;
     }

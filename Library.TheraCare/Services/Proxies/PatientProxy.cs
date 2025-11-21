@@ -104,9 +104,9 @@ public class PatientProxy
         return false;
     }
 
-    public bool DeletePatient(Guid id)
+    public async Task<bool> DeletePatient(Guid id)
     {
-        var response = new WebRequestHandler().Delete("/Patient/" + id).Result;
+        var response = new WebRequestHandler().Delete($"/Patient/{id})");
         if (response != null)
         {
             int index = _patients.FindIndex(p => p.Id == id);
