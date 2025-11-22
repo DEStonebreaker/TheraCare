@@ -14,11 +14,8 @@ public class PatientProxy
 
     private PatientProxy()
     {
-        var PatientResponse = new WebRequestHandler().Get("/Patient").Result;
-        if (PatientResponse != null)
-        {
-            _patients = JsonConvert.DeserializeObject<List<Patient?>>(PatientResponse) ?? new List<Patient?>();
-        }
+        // Initialize with empty list - load data lazily
+        _patients = new List<Patient?>();
     }
 
     public static PatientProxy Current
@@ -34,36 +31,35 @@ public class PatientProxy
         }
     }
 
-    public IEnumerable<Patient> Patients
+    public async Task<IEnumerable<Patient>> GetPatientsAsync()
     {
-        get
+        var GetResponse = await new WebRequestHandler().Get("/Patient");
+        if (GetResponse != null)
         {
             lock (_lock)
             {
-                var GetResponse = new WebRequestHandler().Get("/Patient").Result;
-                if (GetResponse != null)
-                {
-                    _patients = JsonConvert.DeserializeObject<List<Patient>>(GetResponse) ?? new List<Patient>();
-                }
-
-                return _patients.ToList();
+                _patients = JsonConvert.DeserializeObject<List<Patient>>(GetResponse) ?? new List<Patient>();
             }
+        }
+
+        lock (_lock)
+        {
+            return _patients.ToList();
         }
     }
 
-    public Patient CreatePatient(Patient patient)
+    public async Task<Patient> CreatePatientAsync(Patient patient)
     {
-        lock (_lock)
+        var PostRequest = await new WebRequestHandler().Post("/Patient", patient);
+        if (PostRequest != null)
         {
-            // Patient patient = PatientFactory.FromCli();
-            var PostRequest = new WebRequestHandler().Post("/Patient", patient);
-            if (PostRequest != null)
+            lock (_lock)
             {
                 _patients.Add(patient);
             }
-
-            return patient;
         }
+
+        return patient;
     }
 
     public async Task<Patient?> GetPatient(Guid id)
@@ -85,7 +81,10 @@ public class PatientProxy
 
     public ObservableCollection<Patient> GetPatients()
     {
-        return new ObservableCollection<Patient>(_patients);
+        lock (_lock)
+        {
+            return new ObservableCollection<Patient>(_patients);
+        }
     }
 
     public async Task<bool> UpdatePatient(Patient patient)
@@ -93,11 +92,14 @@ public class PatientProxy
         var response = await new WebRequestHandler().Put($"/Patient/{patient.Id}", patient);
         if (response != null)
         {
-            int index = _patients.FindIndex(p => p.Id == patient.Id);
-            if (index != -1)
+            lock (_lock)
             {
-                _patients[index] = patient;
-                return true;
+                int index = _patients.FindIndex(p => p.Id == patient.Id);
+                if (index != -1)
+                {
+                    _patients[index] = patient;
+                    return true;
+                }
             }
         }
 
@@ -106,14 +108,17 @@ public class PatientProxy
 
     public async Task<bool> DeletePatient(Guid id)
     {
-        var response = new WebRequestHandler().Delete($"/Patient/{id})");
+        var response = await new WebRequestHandler().Delete($"/Patient/{id}");
         if (response != null)
         {
-            int index = _patients.FindIndex(p => p.Id == id);
-            if (index != -1)
+            lock (_lock)
             {
-                _patients.RemoveAt(index);
-                return true;
+                int index = _patients.FindIndex(p => p.Id == id);
+                if (index != -1)
+                {
+                    _patients.RemoveAt(index);
+                    return true;
+                }
             }
         }
 

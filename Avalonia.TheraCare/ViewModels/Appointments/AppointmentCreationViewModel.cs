@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using Avalonia.TheraCare.Messages;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -41,22 +42,33 @@ public partial class AppointmentCreationViewModel : ViewModelBase
      */
     public AppointmentCreationViewModel()
     {
-        Patients = PatientProxy.Current.GetPatients();
-        Physicians = PhysicianProxy.Current.GetPhysicians();
+        Patients = new ObservableCollection<Patient>();
+        Physicians = new ObservableCollection<Physician>();
+        _ = LoadDataAsync();
     }
 
     public AppointmentCreationViewModel(Appointment appointment)
     {
         AppointmentId = appointment.Id;
-        Patients = PatientProxy.Current.GetPatients();
-        Physicians = PhysicianProxy.Current.GetPhysicians();
+        Patients = new ObservableCollection<Patient>();
+        Physicians = new ObservableCollection<Physician>();
         SelectedPatient = appointment.Patient;
         SelectedPhysician = appointment.Physician;
         Notes = appointment.Notes;
         Date = appointment.StartTime.Value.Date;
         ApptSpan = appointment.StartTime.Value.TimeOfDay;
         UpdateMode = true;
+        _ = LoadDataAsync();
     }
+
+    private async Task LoadDataAsync()
+    {
+        var patients = await PatientProxy.Current.GetPatientsAsync();
+        var physicians = await PhysicianProxy.Current.GetPhysiciansAsync();
+        Patients = new ObservableCollection<Patient>(patients);
+        Physicians = new ObservableCollection<Physician>(physicians);
+    }
+
 
     // Buttons and Event Handling
 

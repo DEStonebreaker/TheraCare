@@ -14,11 +14,8 @@ public class PhysicianProxy
 
     private PhysicianProxy()
     {
-        var PhysicianResponse = new WebRequestHandler().Get("/Physician").Result;
-        if (PhysicianResponse != null)
-        {
-            _physicians = JsonConvert.DeserializeObject<List<Physician>>(PhysicianResponse) ?? new List<Physician?>();
-        }
+        // Initialize with empty list - load data lazily
+        _physicians = new List<Physician?>();
     }
 
     public static PhysicianProxy Current
@@ -34,49 +31,47 @@ public class PhysicianProxy
         }
     }
 
-    public IEnumerable<Physician> Physicians
+    public async Task<IEnumerable<Physician>> GetPhysiciansAsync()
     {
-        get
+        var GetResponse = await new WebRequestHandler().Get("/Physician");
+        if (GetResponse != null)
         {
             lock (_lock)
             {
-                var GetResponse = new WebRequestHandler().Get("/Physician").Result;
-                if (GetResponse != null)
-                {
-                    _physicians = JsonConvert.DeserializeObject<List<Physician>>(GetResponse) ?? new List<Physician>();
-                }
-
-                return _physicians.ToList();
+                _physicians = JsonConvert.DeserializeObject<List<Physician>>(GetResponse) ?? new List<Physician>();
             }
+        }
+
+        lock (_lock)
+        {
+            return _physicians.ToList();
         }
     }
 
-    public Physician CreatePhysician(Physician physician)
+    public async Task<Physician> CreatePhysicianAsync(Physician physician)
     {
-        lock (_lock)
+        var PostRequest = await new WebRequestHandler().Post("/Physician", physician);
+        if (PostRequest != null)
         {
-            // Physician physician = PhysicianFactory.FromCli();
-            // _physicians.Add(physician);
-            // return physician;
-
-            var PostRequest = new WebRequestHandler().Post("/Physician",physician);
-            if (PostRequest != null)
+            lock (_lock)
             {
                 _physicians.Add(physician);
             }
-
-            return physician;
         }
+
+        return physician;
     }
 
     public ObservableCollection<Physician> GetPhysicians()
     {
-        return new ObservableCollection<Physician>(_physicians);
+        lock (_lock)
+        {
+            return new ObservableCollection<Physician>(_physicians);
+        }
     }
 
     public async Task<Physician?> GetPhysician(Guid id)
     {
-        // return _physicians.FirstOrDefault(p => p.Id == id);
         try
         {
             var GetRequest = await new WebRequestHandler().Get("/Physician/" + id);
@@ -97,11 +92,14 @@ public class PhysicianProxy
         var response = await new WebRequestHandler().Put($"/Physician/{physician.Id}", physician);
         if (response != null)
         {
-            int index = _physicians.FindIndex(p => p.Id == physician.Id);
-            if (index != -1)
+            lock (_lock)
             {
-                _physicians[index] = physician;
-                return true;
+                int index = _physicians.FindIndex(p => p.Id == physician.Id);
+                if (index != -1)
+                {
+                    _physicians[index] = physician;
+                    return true;
+                }
             }
         }
 
@@ -113,11 +111,14 @@ public class PhysicianProxy
         var response = await new WebRequestHandler().Delete($"/Physician/{id}");
         if (response != null)
         {
-            int index = _physicians.FindIndex(p => p.Id == id);
-            if (index != -1)
+            lock (_lock)
             {
-                _physicians.RemoveAt(index);
-                return true;
+                int index = _physicians.FindIndex(p => p.Id == id);
+                if (index != -1)
+                {
+                    _physicians.RemoveAt(index);
+                    return true;
+                }
             }
         }
 

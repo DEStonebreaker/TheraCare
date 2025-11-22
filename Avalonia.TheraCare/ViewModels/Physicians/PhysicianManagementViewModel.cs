@@ -44,13 +44,10 @@ public partial class PhysicianManagementViewModel : ViewModelBase
     [RelayCommand]
     public async Task AsyncDeletePhysician()
     {
-        await Task.Run(() =>
-        {
-            if (SelectedPhysician == null) return;
+        if (SelectedPhysician == null) return;
 
-            PhysicianProxy.Current.DeletePhysician(SelectedPhysician.Id);
-            Physicians.Remove(SelectedPhysician);
-            SelectedPhysician = null;
-        });
+        PhysicianProxy.Current.DeletePhysician(SelectedPhysician.Id);
+        Physicians.Remove(SelectedPhysician);
+        SelectedPhysician = null;
     }
 }

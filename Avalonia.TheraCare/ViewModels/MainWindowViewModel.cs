@@ -30,8 +30,8 @@ public partial class MainWindowViewModel : ViewModelBase
         CurrentViewModel = _homeViewModel;
         WeakReferenceMessenger.Default.Register<ViewChangeMessage>
             (this, (r, e) => { CurrentViewModel = e.Value; });
-        
-        
+
+
         var configDir = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
             "TheraCare"
@@ -41,44 +41,37 @@ public partial class MainWindowViewModel : ViewModelBase
         tmpFile = Path.Combine(configDir, "theracare_data.json");
         if (!File.Exists(tmpFile))
             File.Create(tmpFile);
-        
     }
-    
+
     [RelayCommand]
     public async Task Export()
     {
-        await Task.Run(() =>
+        var patients = await PatientProxy.Current.GetPatientsAsync();
+        var patientString = JsonConvert.SerializeObject(
+            patients.Where(b => b != null).Select(b => b));
+
+        await using (StreamWriter sw = new StreamWriter($"{tmpFile}"))
         {
-            var patientString = JsonConvert.SerializeObject(
-                PatientProxy.Current.Patients.Where(b => b != null)
-                    .Select(b => b));
-            
-            using (StreamWriter sw = new StreamWriter($"{tmpFile}"))
-            {
-                sw.WriteLine(patientString);
-            }
-        });
+            await sw.WriteLineAsync(patientString);
+        }
     }
 
     [RelayCommand]
     public async Task Import()
     {
-        await Task.Run(() =>
+        using (StreamReader sr = new StreamReader(tmpFile))
         {
-            using (StreamReader sr = new StreamReader(tmpFile))
+            var patientString = await sr.ReadLineAsync();
+            if (string.IsNullOrEmpty(patientString))
             {
-                var patientString = sr.ReadLine();
-                if (string.IsNullOrEmpty(patientString))
-                {
-                    return;
-                }
-
-                var patients = JsonConvert.DeserializeObject<List<Patient>>(patientString);
-                foreach (var pati in patients)
-                {
-                    PatientProxy.Current.CreatePatient(pati);
-                }
+                return;
             }
-        });
+
+            var patients = JsonConvert.DeserializeObject<List<Patient>>(patientString);
+            foreach (var pati in patients)
+            {
+                await PatientProxy.Current.CreatePatientAsync(pati);
+            }
+        }
     }
 }

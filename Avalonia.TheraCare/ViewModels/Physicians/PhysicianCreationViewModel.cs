@@ -45,24 +45,21 @@ public partial class PhysicianCreationViewModel : ViewModelBase
     [RelayCommand]
     public async Task AsyncSubmit()
     {
-        await Task.Run(() =>
+        if (_updateMode == false)
         {
-            if (_updateMode == false)
-            {
-                var phys = PhysicianFactory.FromArgs(FirstName, LastName, LicenseNumber, GradDate, Specialization);
-                PhysicianProxy.Current.CreatePhysician(phys);
-                ClearFields();
-            }
-            else
-            {
-                var phys = PhysicianFactory.FromArgsUpdater(Id, FirstName, LastName, LicenseNumber, GradDate,
-                    Specialization);
-                PhysicianProxy.Current.UpdatePhysician(phys);
-                Title = "Successfully Updated Physician";
-                ClearFields();
-                CanSubmit = false;
-            }
-        });
+            var phys = PhysicianFactory.FromArgs(FirstName, LastName, LicenseNumber, GradDate, Specialization);
+            await PhysicianProxy.Current.CreatePhysicianAsync(phys);
+            ClearFields();
+        }
+        else
+        {
+            var phys = PhysicianFactory.FromArgsUpdater(Id, FirstName, LastName, LicenseNumber, GradDate,
+                Specialization);
+            await PhysicianProxy.Current.UpdatePhysician(phys);
+            Title = "Successfully Updated Physician";
+            ClearFields();
+            CanSubmit = false;
+        }
     }
 
     [RelayCommand]

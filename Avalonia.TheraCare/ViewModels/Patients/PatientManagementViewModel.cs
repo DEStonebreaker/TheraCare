@@ -17,7 +17,14 @@ public partial class PatientManagementViewModel : ViewModelBase
 
     public PatientManagementViewModel()
     {
-        Patients = PatientProxy.Current.GetPatients();
+        Patients = new ObservableCollection<Patient>();
+        _ = LoadPatientsAsync();
+    }
+
+    private async Task LoadPatientsAsync()
+    {
+        var patients = await PatientProxy.Current.GetPatientsAsync();
+        Patients = new ObservableCollection<Patient>(patients);
     }
 
     // Buttons and Event Handling
@@ -32,14 +39,11 @@ public partial class PatientManagementViewModel : ViewModelBase
     [RelayCommand]
     public async Task AsyncDeletePatient()
     {
-        await Task.Run(() =>
-        {
-            if (SelectedPatient == null) return;
+        if (SelectedPatient == null) return;
 
-            PatientProxy.Current.DeletePatient(SelectedPatient.Id);
-            Patients.Remove(SelectedPatient);
-            SelectedPatient = null;
-        });
+        await PatientProxy.Current.DeletePatient(SelectedPatient.Id);
+        Patients.Remove(SelectedPatient);
+        SelectedPatient = null;
     }
 
     [RelayCommand]

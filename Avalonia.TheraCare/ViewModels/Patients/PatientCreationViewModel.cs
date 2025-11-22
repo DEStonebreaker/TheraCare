@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Avalonia.TheraCare.Messages;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -63,30 +64,31 @@ public partial class PatientCreationViewModel : ViewModelBase
     }
 
     // Button and Event Handling
-    
+
     /**
      * Handles both the patient creation function, and edit patient functionality.
      * If the edit button on the management view is pressed, update mode is true.
      */
     [RelayCommand]
-    public void Submit()
+    public async Task Submit()
     {
         if (updateMode == false)
         {
             var pati = PatientFactory.FromArgs(FirstName, LastName, Address, BirthDate, Race, Gender, Diagnosis,
                 Medications);
-            PatientProxy.Current.CreatePatient(pati);
+            await PatientProxy.Current.CreatePatientAsync(pati);
             ClearFields();
         }
         else
         {
             var pati = PatientFactory.FromArgsUpdater(Id, FirstName, LastName, Address, BirthDate, Race, Gender,
                 Diagnosis, Medications);
-            PatientProxy.Current.UpdatePatient(pati);
-            Title = "Successfully Updated Physician";
+            await PatientProxy.Current.UpdatePatient(pati);
+            Title = "Successfully Updated Patient";
             ClearFields();
         }
     }
+
 
     [RelayCommand]
     public void GoBack()
@@ -106,7 +108,7 @@ public partial class PatientCreationViewModel : ViewModelBase
     {
         Submitable = CanSubmit();
     }
-    
+
     partial void OnLastNameChanged(string? value)
     {
         Submitable = CanSubmit();
@@ -118,13 +120,14 @@ public partial class PatientCreationViewModel : ViewModelBase
     }
 
     // Helper Functions
-    
+
     private bool CanSubmit()
     {
         if (FirstName == null || FirstName == "")
         {
             return false;
         }
+
         if (LastName == null || LastName == "")
         {
             return false;
