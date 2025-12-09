@@ -21,7 +21,16 @@ public partial class PhysicianManagementViewModel : ViewModelBase
 
     public PhysicianManagementViewModel()
     {
-        Physicians = PhysicianProxy.Current.GetPhysicians();
+        // Physicians = PhysicianProxy.Current.GetPhysicians();
+        
+        Physicians = new ObservableCollection<Physician>();
+        _ = LoadPhysiciansAsync();
+    }
+    
+    private async Task LoadPhysiciansAsync()
+    {
+        var physicians = await PhysicianProxy.Current.GetPhysiciansAsync();
+        Physicians = new ObservableCollection<Physician>(physicians);
     }
 
     // Buttons and Event Handling
