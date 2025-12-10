@@ -7,12 +7,12 @@ public class PatientEC
 {
     public IEnumerable<Patient> GetPatients()
     {
-        return FakeDatabase.Patients;
+        return Filebase.Current.Patients;
     }
 
     public Patient? GetById(Guid id)
     {
-        return FakeDatabase.Patients.FirstOrDefault(p => p.Id == id);
+        return Filebase.Current.Patients.FirstOrDefault(p => p.Id == id);
     }
 
     public Patient? Delete(Guid id)
@@ -20,7 +20,7 @@ public class PatientEC
         var toRemove = GetById(id);
         if (toRemove != null)
         {
-            FakeDatabase.Patients.Remove(toRemove);
+            Filebase.Current.Delete(id);
         }
 
         return toRemove;
@@ -31,25 +31,25 @@ public class PatientEC
         var state = GetById(patient.Id);
         if (state != null) return null;
         
-        FakeDatabase.Patients.Add(patient);
-        return patient;
+        return Filebase.Current.AddOrUpdate(patient);
+        // return patient;
     }
 
     public bool Put(Guid id, Patient patient)
     {
-        var pati = FakeDatabase.Patients.FirstOrDefault(p => p.Id == patient.Id);
+        var pati = Filebase.Current.Patients.FirstOrDefault(p => p.Id == patient.Id);
         if (pati == null)
         {
             return false;
         }
+        Filebase.Current.AddOrUpdate(patient);
+        // int index = FakeDatabase.Patients.FindIndex(p => p.Id == patient.Id);
+        // if (index != -1)
+        // {
+        //     FakeDatabase.Patients[index] = patient;
+        //     return true;
+        // }
 
-        int index = FakeDatabase.Patients.FindIndex(p => p.Id == patient.Id);
-        if (index != -1)
-        {
-            FakeDatabase.Patients[index] = patient;
-            return true;
-        }
-
-        return false;
+        return true;
     }
 }
